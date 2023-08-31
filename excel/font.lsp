@@ -1,7 +1,9 @@
 
 ; https://github.com/qudrnr/lisp
 ; Autolisp and Visual Lisp in Autocad
-; To change the font size of the selected cell range with the current Excel running in the Autolisp programming language
+; To change the font size of the selected cell range with the current Excel running
+
+(vl-load-com)
 
 (defun ChangeSelectedCellFontSize (/
 
