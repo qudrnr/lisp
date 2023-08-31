@@ -1,7 +1,9 @@
+
+; https://github.com/qudrnr/lisp
 ; Autolisp and Visual Lisp in Autocad
 ; To change the font size of the selected cell range with the current Excel running in the Autolisp programming language
 
-(defun ChangeSelectedCellFont (/
+(defun ChangeSelectedCellFontSize (/
 
 		sheetname selectRange fontsize
 		app wList workBook sList oSheet oRange oFont
@@ -30,9 +32,11 @@
 			(setq oFont (vlax-get-property oRange 'Font))
 		)
 
+		; change font size
 		(vlax-put-property oFont 'Size fontsize)
 	)
 
+	; release object
 	(foreach obj (list oFont oRange oSheet sList workBook wList app)
 
 		(vl-catch-all-apply 'vlax-release-object (list obj))
