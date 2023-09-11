@@ -80,7 +80,7 @@
 			(setq oFont (vlax-get-property oRange 'Font))
 		)
 
-		; change font size
+		; change font thickness
 		(vlax-put-property oFont 'Bold :vlax-true)
 	)
 

@@ -39,11 +39,21 @@
 
 			(setq oRange (vlax-get-property oSheet 'Range selectRange))
 
+			; border Collection
 			(setq oBorder (vlax-get-property oRange 'Borders))
 		)
 
-		; change border line
-		(vlax-put-property oBorder 'LineStyle lineType)
+		(progn
+
+			; change border line
+			(vlax-put-property oBorder 'LineStyle lineType)
+
+			; Change the thickness of border
+			; 1, 2, 3, 4
+			; -4138 : normal
+			(vlax-put-property oBorder 'Weight 2)
+
+		)
 	)
 
 	; release object
