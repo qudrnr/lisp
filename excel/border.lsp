@@ -53,6 +53,12 @@
 			; -4138 : normal
 			(vlax-put-property oBorder 'Weight 2)
 
+			; Change the color of border
+			; xlColorIndexAutomatic
+			; xlColorIndexNone
+			; 1~56
+			(vlax-put-property oBorder 'ColorIndex 5)
+
 		)
 	)
 
