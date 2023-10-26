@@ -2,9 +2,6 @@
 ; https://github.com/qudrnr/lisp
 ; Autolisp and Visual Lisp in Autocad
 
-; To extract the first word from a given string
-; Divide a sentence by spaces
-
 (vl-load-com)
 
 ; Remove the white space in front of the sentence
@@ -41,6 +38,13 @@
 	)
 )
 
+; ---------------------------------------------------------
+; To extract the first word from a given string
+; Divide a sentence by spaces
+; ---------------------------------------------------------
+; (qr:SentenceSplit "hello world")
+; -> "hello"
+; ---------------------------------------------------------
 (defun qr:extractFirstWord ( sentence / words)
 
 	; Verify that parameter values exist
