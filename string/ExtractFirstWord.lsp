@@ -4,7 +4,17 @@
 
 (vl-load-com)
 
+; ---------------------------------------------------------
 ; Remove the white space in front of the sentence
+; ---------------------------------------------------------
+; argument
+; - string type
+; ---------------------------------------------------------
+; return
+; - string type
+; ---------------------------------------------------------
+; " hello" -> "hello"
+; ---------------------------------------------------------
 (defun qr:RemoveLeadingWhitespace ( str / new )
 
 	(if (setq new (vl-string->list str))
@@ -21,7 +31,20 @@
 	)
 )
 
+; ---------------------------------------------------------
 ; Separate the string based on the space and receive the first word back
+; ---------------------------------------------------------
+; argument 1
+; - string type
+
+; argument 2
+; - string type
+; ---------------------------------------------------------
+; return
+; - string type
+; ---------------------------------------------------------
+; "hello, world" "," -> (list "hello" "world")
+; ---------------------------------------------------------
 (defun qr:SentenceSplit ( str base / pos )
 
 	(if (setq pos (vl-string-search base str))
