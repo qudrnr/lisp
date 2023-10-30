@@ -11,7 +11,8 @@
 ; return
 ; - string type
 ; ---------------------------------------------------------
-; " hello " -> "hello"
+; (qr:RemoveWhitespace " hello ")
+; 	> "hello"
 ; ---------------------------------------------------------
 (defun qr:RemoveWhitespace ( str / new )
 
@@ -43,7 +44,8 @@
 ; return
 ; - string type
 ; ---------------------------------------------------------
-; " hello " -> "hello "
+; (qr:RemoveLeadingWhitespace " hello ")
+; 	> "hello "
 ; ---------------------------------------------------------
 (defun qr:RemoveLeadingWhitespace ( str / new )
 
@@ -70,7 +72,8 @@
 ; return
 ; - string type
 ; ---------------------------------------------------------
-; " hello " -> " hello"
+; (qr:RemoveTailWhitespace " hello ")
+; 	> " hello"
 ; ---------------------------------------------------------
 (defun qr:RemoveTailWhitespace ( str / new )
 
@@ -98,7 +101,8 @@
 ; return
 ; - int
 ; ---------------------------------------------------------
-; "hello, 0 world" -> 7
+; (qr:findFirstNumber "hello, 0 world")
+; 	> 7
 ; ---------------------------------------------------------
 (defun qr:findFirstNumber ( strValue / lst num pos )
 
@@ -137,7 +141,8 @@
 ; return
 ; - string type
 ; ---------------------------------------------------------
-; "hello, world" "," -> (list "hello" "world")
+; (qr:SentenceSplit "hello, world" ", ")
+; 	> (list "hello" "world")
 ; ---------------------------------------------------------
 (defun qr:SentenceSplit ( str base / pos )
 
@@ -157,10 +162,10 @@
 
 ; ---------------------------------------------------------
 ; To extract the first word from a given string
-; Divide a sentence by spaces
+; Divide a sentence by spaces (" ")
 ; ---------------------------------------------------------
 ; (qr:SentenceSplit "hello world")
-; -> "hello"
+;	> "hello"
 ; ---------------------------------------------------------
 (defun qr:extractFirstWord ( sentence / words)
 
