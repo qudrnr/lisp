@@ -132,6 +132,7 @@
 
 ; ---------------------------------------------------------
 ; Separate the string based on the space and receive the first word back
+
 ; ---------------------------------------------------------
 ; argument 1
 ; - string type
