@@ -3,7 +3,7 @@
 ; Autolisp and Visual Lisp in Autocad
 
 ; ---------------------------------------------------------
-; Remove the white space in the sentence
+; Remove white space before/after sentences
 ; ---------------------------------------------------------
 ; argument
 ; - string type
@@ -36,7 +36,7 @@
 )
 
 ; ---------------------------------------------------------
-; Remove the white space in front of the sentence
+; Remove white space at the beginning of the sentence
 ; ---------------------------------------------------------
 ; argument
 ; - string type
@@ -44,10 +44,10 @@
 ; return
 ; - string type
 ; ---------------------------------------------------------
-; (qr:RemoveLeadingWhitespace " hello ")
+; (qr:RemoveWhiteSpace-front " hello ")
 ; 	> "hello "
 ; ---------------------------------------------------------
-(defun qr:RemoveLeadingWhitespace ( str / new )
+(defun qr:RemoveWhiteSpace-front ( str / new )
 
 	(if (setq new (vl-string->list str))
 
@@ -64,7 +64,7 @@
 )
 
 ; ---------------------------------------------------------
-; Remove the white space in tail of the sentence
+; Remove white space at the back of the sentence
 ; ---------------------------------------------------------
 ; argument
 ; - string type
@@ -72,10 +72,10 @@
 ; return
 ; - string type
 ; ---------------------------------------------------------
-; (qr:RemoveTailWhitespace " hello ")
+; (qr:RemoveWhiteSpace-rear " hello ")
 ; 	> " hello"
 ; ---------------------------------------------------------
-(defun qr:RemoveTailWhitespace ( str / new )
+(defun qr:RemoveWhiteSpace-rear ( str / new )
 
 	(if (setq new (vl-string->list str))
 
@@ -91,9 +91,8 @@
 	)
 )
 
-
 ; ---------------------------------------------------------
-; Find the position of the first digit in the string
+; Find the position of the first number in the sentence
 ; ---------------------------------------------------------
 ; argument
 ; - string type
@@ -101,10 +100,10 @@
 ; return
 ; - int
 ; ---------------------------------------------------------
-; (qr:findFirstNumber "hello, 0 world")
+; (qr:FindPositionFirstNumber "hello, 0 world")
 ; 	> 7
 ; ---------------------------------------------------------
-(defun qr:findFirstNumber ( strValue / lst num pos )
+(defun qr:FindPositionFirstNumber ( strValue / lst num pos )
 
 	(and
 
@@ -131,7 +130,7 @@
 )
 
 ; ---------------------------------------------------------
-; Separate the string based on the space and receive the first word back
+; Divide sentences using reference characters.
 ; ---------------------------------------------------------
 ; argument 1
 ; - string type
@@ -141,10 +140,10 @@
 ; return
 ; - string type
 ; ---------------------------------------------------------
-; (qr:SentenceSplit "hello, world" ", ")
+; (qr:DivideSentence "hello, world" ", ")
 ; 	> (list "hello" "world")
 ; ---------------------------------------------------------
-(defun qr:SentenceSplit ( str base / pos )
+(defun qr:DivideSentence ( str base / pos )
 
 	(if (setq pos (vl-string-search base str))
 
@@ -161,13 +160,13 @@
 )
 
 ; ---------------------------------------------------------
-; To extract the first word from a given string
+; Get the first word from the sentence.
 ; Divide a sentence by spaces (" ")
 ; ---------------------------------------------------------
-; (qr:SentenceSplit "hello world")
+; (qr:GetFirstWordfromString "hello world")
 ;	> "hello"
 ; ---------------------------------------------------------
-(defun qr:extractFirstWord ( sentence / words)
+(defun qr:GetFirstWordfromString ( sentence / words)
 
 	; Verify that parameter values exist
 	; Verify that parameter values are in string format
@@ -177,12 +176,38 @@
 
 			(= 'str (type sentence))
 
-			(setq newSentence (qr:RemoveLeadingWhitespace sentence))
+			(setq newSentence (qr:RemoveWhiteSpace-front sentence))
 
 			(setq words (qr:SentenceSplit newSentence " "))
 		)
 
-		(nth 0 words)
+		(car words)
+	)
+)
+
+; ---------------------------------------------------------
+; To extract the first word from a given string
+; Divide a sentence by spaces (" ")
+; ---------------------------------------------------------
+; (qr:GetLastWordfromString "hello world")
+;	> "world"
+; ---------------------------------------------------------
+(defun qr:GetLastWordfromString ( sentence / words)
+
+	; Verify that parameter values exist
+	; Verify that parameter values are in string format
+	; Remove the white space of the sentence
+	; Separate the string based on the space and receive the first word back
+	(if (and sentence
+
+			(= 'str (type sentence))
+
+			(setq newSentence (qr:RemoveWhiteSpace-rear sentence))
+
+			(setq words (qr:SentenceSplit newSentence " "))
+		)
+
+		(last words)
 	)
 )
 
