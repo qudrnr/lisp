@@ -2,48 +2,6 @@
 ; https://github.com/qudrnr/lisp
 ; Autolisp and Visual Lisp in Autocad
 
-
-; ---------------------------------------------------------
-; Remove white space before/after sentences
-; 문장 앞/뒤 화이트 스페이스 제거한다.
-; ---------------------------------------------------------
-; (qr-string-removeWhiteSpace " a,b,c ")
-; > "a,b,c"
-; ---------------------------------------------------------
-(defun qr-string-removeWhiteSpace ( sentence )
-
-	(if (= 'str (type sentence))
-
-		(if (setq new (vl-string->list sentence))
-
-			(progn
-
-				(setq trim (mapcar 'ascii '("\t" "\n" "\r" "\e" " ")))
-
-				(if (= 'LIST (type new))
-
-					(while (vl-position (car new) trim)
-
-						(setq new (cdr new))
-					)
-				)
-
-				(if (= 'LIST (type new))
-
-					(while (vl-position (last new) trim)
-
-						(setq new (reverse (cdr (reverse new))))
-					)
-				)
-
-				(vl-list->string new)
-			)
-			sentence
-		)
-		"false:bad argument type"
-	)
-)
-
 ; ---------------------------------------------------------
 ; Divide sentences using reference characters.
 ; 참조 문자를 사용해서 문장을 나눕니다.
