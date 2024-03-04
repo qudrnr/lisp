@@ -8,6 +8,10 @@ qr-string-lowerCase
     - Converts all strings to lowercase letters.
     - 문자열을 모두 소문자로 변환합니다.
 
+qr-string-insert
+    - Combine all the texts in the list and put characters in between.
+    - 리스트안에 있는 모든 텍스트를 합치고 그 사이에 문자를 넣어준다.
+
 ```
 
 # Registry.lsp

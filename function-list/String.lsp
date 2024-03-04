@@ -62,3 +62,57 @@
 		"false:bad argument type"
 	)
 )
+
+
+; ---------------------------------------------------------
+; Combine all the texts in the list and put characters in between.
+; 리스트안에 있는 모든 텍스트를 합치고 그 사이에 문자를 넣어준다.
+; ---------------------------------------------------------
+; (qr-string-insert '("A" "B" "C") "/")  -> "A/B/C"
+; ---------------------------------------------------------
+(defun qr-string-insert ( args add / string-list qty iv )
+
+	(setq string-list
+		(vl-remove-if-not
+			'(lambda ( ov )
+
+				(= 'STR (type ov))
+
+			) args
+		)
+	)
+
+	(if string-list
+
+		(progn
+
+			(setq qty (length string-list))
+
+			(setq iv 0)
+
+			(apply 'strcat
+				(vl-remove nil
+					(mapcar
+						'(lambda ( str )
+
+							(setq iv (1+ iv))
+
+							(cond
+								(	(< iv qty)
+
+									(strcat str add)
+								)
+								(	(= iv qty)
+
+									str
+								)
+							)
+
+						) string-list
+					)
+				)
+			)
+		)
+		"false:bad argument type"
+	)
+)
