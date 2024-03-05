@@ -31,7 +31,7 @@
 			)
 			(list sentence)
 		)
-		"false:bad argument type"
+		"failed:bad argument type"
 	)
 )
 
@@ -59,7 +59,7 @@
 				) (vl-string->list args)
 			)
 		)
-		"false:bad argument type"
+		"failed:bad argument type"
 	)
 )
 
@@ -113,6 +113,6 @@
 				)
 			)
 		)
-		"false:bad argument type"
+		"failed:bad argument type"
 	)
 )

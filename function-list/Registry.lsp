@@ -53,7 +53,7 @@
 
 	(if (= nil result)
 
-		(setq result "false:Registry not found, try reinstalling AutoCAD")
+		(setq result "failed:Registry not found, try reinstalling AutoCAD")
 	)
 
 	result

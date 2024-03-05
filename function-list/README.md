@@ -21,3 +21,11 @@ qr-reg-startup
     - [appload]-[startup]에 있는 목록을 레지스트리에서 값을 가져온다.
 
 ```
+
+# Style.lsp
+```
+qr-style-text
+    - make text style
+    - 텍스트 스타일을 만든다.
+
+```
