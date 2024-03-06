@@ -12,6 +12,10 @@ qr-string-insert
     - Combine all the texts in the list and put characters in between.
     - 리스트안에 있는 모든 텍스트를 합치고 그 사이에 문자를 넣어준다.
 
+qr-string-removeNumber
+    - Remove the numbers in the string.
+    - 문자열에 있는 숫자를 제거한다.
+
 ```
 
 # Registry.lsp
