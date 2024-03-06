@@ -116,3 +116,40 @@
 		"failed:bad argument type"
 	)
 )
+
+
+; ---------------------------------------------------------
+; remove number
+; 숫자를 제거한다.
+; ---------------------------------------------------------
+; (qr-string-removeNumber "123 Hello, World!! 456")
+; > " Hello, World!! "
+; ---------------------------------------------------------
+; (qr-string-removeNumber "123456")
+; > ""
+; ---------------------------------------------------------
+(defun qr-string-removeNumber ( args / lst result )
+
+	(if (= 'str (type args))
+
+		(progn
+
+			(setq lst (vl-string->list args))
+
+			(if (setq result
+					(vl-remove-if
+						'(lambda ( var )
+
+							(<= 48 var 57)
+
+						) lst
+					)
+				)
+
+				(vl-list->string result)
+				""
+			)
+		)
+		"failed:bad argument type"
+	)
+)
