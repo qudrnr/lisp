@@ -91,3 +91,27 @@
 	)
 )
 
+; ---------------------------------------------------------
+; If there is no Path in the 'Trusted Location', add it.
+; Trusted Location에 Path가 없으면 추가해준다.
+; ---------------------------------------------------------
+; (qr-style-addTrustLocation "c:\\test-app\\")
+; ---------------------------------------------------------
+(defun qr-style-addTrustLocation ( new-path / path-list path-div-list )
+
+	(if (and
+
+			(setq path-list (getvar 'TRUSTEDPATHS))
+
+			(setq path-div-list
+				(mapcar 'strcase
+					(qr-string-divide path-list ";")
+				)
+			)
+
+			(not (vl-position new-path path-div-list))
+		)
+
+		(setvar 'TRUSTEDPATHS (strcat path-list ";" new-path))
+	)
+)

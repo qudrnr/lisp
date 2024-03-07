@@ -40,8 +40,8 @@ qr-style-text
     - make text style
     - 텍스트 스타일을 만든다.
 
-qr-style-trust
-- If there is no Path in the 'Trusted Location', add it.
-- 'Trusted Location'에 Path가 없으면 추가해준다.
+qr-style-addTrustLocation
+    - If there is no Path in the 'Trusted Location', add it.
+    - 'Trusted Location'에 Path가 없으면 추가해준다.
 
 ```
