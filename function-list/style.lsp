@@ -92,10 +92,13 @@
 )
 
 ; ---------------------------------------------------------
-; If there is no Path in the 'Trusted Location', add it.
-; Trusted Location에 Path가 없으면 추가해준다.
+; 'Trusted Location' adds Path.
+; 'Trusted Location'에서 Path를 추가.
 ; ---------------------------------------------------------
 ; (qr-style-addTrustLocation "c:\\test-app\\")
+; ---------------------------------------------------------
+; function list
+; - qr-string-divide
 ; ---------------------------------------------------------
 (defun qr-style-addTrustLocation ( new-path / path-list path-div-list )
 
@@ -108,10 +111,52 @@
 					(qr-string-divide path-list ";")
 				)
 			)
+		)
+		(if (not (vl-position (strcase new-path) path-div-list))
 
-			(not (vl-position new-path path-div-list))
+			(progn
+
+				(setvar 'TRUSTEDPATHS (strcat path-list ";" new-path))
+
+				t
+			)
+		)
+	)
+)
+
+; ---------------------------------------------------------
+; Delete Path from 'Trusted Location'.
+; 'Trusted Location'에서 Path를 삭제.
+; ---------------------------------------------------------
+; (qr-style-delTrustLocation "c:\\test-app\\")
+; ---------------------------------------------------------
+; function list
+; - qr-string-divide
+; - qr-string-insert
+; - qr-list-removeIndex
+; ---------------------------------------------------------
+(defun qr-style-delTrustLocation ( del-path / path-list path-div-list pos path-new-list )
+
+	(if (and
+
+			(setq path-list (getvar 'TRUSTEDPATHS))
+
+			(setq path-div-list
+				(mapcar 'strcase
+					(qr-string-divide path-list ";")
+				)
+			)
+
+			(setq pos (vl-position (strcase del-path) path-div-list))
 		)
 
-		(setvar 'TRUSTEDPATHS (strcat path-list ";" new-path))
+		(progn
+
+			(setq path-new-list (qr-list-removeIndex pos path-div-list))
+
+			(setvar 'TRUSTEDPATHS (qr-string-insert path-new-list ";"))
+
+			t
+		)
 	)
 )
