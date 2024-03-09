@@ -6,14 +6,14 @@
 ; make text style
 ; 텍스트 스타일을 만든다.
 ; ---------------------------------------------------------
-; (qr-style-text
+; (qr:style-text
 ; 	'(	("name""new1")
 ; 		("height" 2.5)
 ; 		("font" "romans")
 ; 	)
 ; )
 ; ---------------------------------------------------------
-; (qr-style-text
+; (qr:style-text
 ; 	'(	("name""new2")
 ; 		("height" 3.5)
 ; 		("font" "romans")
@@ -22,7 +22,7 @@
 ; 	)
 ; )
 ; ---------------------------------------------------------
-(defun qr-style-text ( args / name height width font bigfont )
+(defun qr:style-text ( args / name height width font bigfont )
 
 	(mapcar
 		'(lambda ( str / var )
@@ -95,12 +95,12 @@
 ; 'Trusted Location' adds Path.
 ; 'Trusted Location'에서 Path를 추가.
 ; ---------------------------------------------------------
-; (qr-style-addTrustLocation "c:\\test-app\\")
+; (qr:style-addTrustLocation "c:\\test-app\\")
 ; ---------------------------------------------------------
 ; function list
-; - qr-string-divide
+; - qr:string-divide
 ; ---------------------------------------------------------
-(defun qr-style-addTrustLocation ( new-path / path-list path-div-list )
+(defun qr:style-addTrustLocation ( new-path / path-list path-div-list )
 
 	(if (and
 
@@ -108,7 +108,7 @@
 
 			(setq path-div-list
 				(mapcar 'strcase
-					(qr-string-divide path-list ";")
+					(qr:string-divide path-list ";")
 				)
 			)
 		)
@@ -128,14 +128,14 @@
 ; Delete Path from 'Trusted Location'.
 ; 'Trusted Location'에서 Path를 삭제.
 ; ---------------------------------------------------------
-; (qr-style-delTrustLocation "c:\\test-app\\")
+; (qr:style-delTrustLocation "c:\\test-app\\")
 ; ---------------------------------------------------------
 ; function list
-; - qr-string-divide
-; - qr-string-insert
-; - qr-list-removeIndex
+; - qr:string-divide
+; - qr:string-insert
+; - qr:list-removeIndex
 ; ---------------------------------------------------------
-(defun qr-style-delTrustLocation ( del-path / path-list path-div-list pos path-new-list )
+(defun qr:style-delTrustLocation ( del-path / path-list path-div-list pos path-new-list )
 
 	(if (and
 
@@ -143,7 +143,7 @@
 
 			(setq path-div-list
 				(mapcar 'strcase
-					(qr-string-divide path-list ";")
+					(qr:string-divide path-list ";")
 				)
 			)
 
@@ -152,9 +152,9 @@
 
 		(progn
 
-			(setq path-new-list (qr-list-removeIndex pos path-div-list))
+			(setq path-new-list (qr:list-removeIndex pos path-div-list))
 
-			(setvar 'TRUSTEDPATHS (qr-string-insert path-new-list ";"))
+			(setvar 'TRUSTEDPATHS (qr:string-insert path-new-list ";"))
 
 			t
 		)

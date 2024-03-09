@@ -3,13 +3,13 @@
 ; Import the list in [appload]-[startup] from the registry.
 ; [appload]-[startup]에 있는 목록을 레지스트리에서 값을 가져온다.
 ; ---------------------------------------------------------
-; (qr-reg-startup)
+; (qr:reg-startup)
 ; > ("C:\\Program Files\\Autodesk\\AutoCAD 2024\\AcDwfMarkupUi.arx"
 ; 	 "C:\\Program Files\\Autodesk\\AutoCAD 2024\\AcCounting.crx"
 ; 	 "2"
 ; )
 ; ---------------------------------------------------------
-(defun qr-reg-startup (/
+(defun qr:reg-startup (/
 
 		autocad-App product-key ir registry-root result
 	)
