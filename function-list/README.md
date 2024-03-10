@@ -51,7 +51,11 @@ qr:style-delTrustLocation
 
 # draw.lsp
 ```
-qr:draw-line
+qr:draw-liner
     - draw line
     - 라인 그리기
+
+qr:draw-lines
+    - draw Continuous line
+    - 연속된 라인 그리기
 ```
