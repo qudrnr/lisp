@@ -56,3 +56,31 @@
 		 ) plst (cdr plst)
 	)
 )
+
+
+; ---------------------------------------------------------
+; draw circle
+; - 원 그리기
+; ---------------------------------------------------------
+; argument
+; > [LIST]
+; > [INT],[FLOAT]
+; ---------------------------------------------------------
+; return
+; > [VLA-OBJECT] : #<VLA-OBJECT IAcadCircle 00000196b4118628>
+; ---------------------------------------------------------
+; (qr:draw-Circle '(0.0 0.0 0.0) 100)
+; ---------------------------------------------------------
+(defun qr:draw-Circle ( ptr rad / doc spc )
+
+	(setq doc (vla-get-activedocument (vlax-get-acad-object))
+		  spc (vlax-get-property doc 'modelspace)
+	)
+
+	(if (= 'str (type rad))		(setq rad (atof rad)))
+
+	(if (and (= 'LIST (type ptr)) (< 0 rad))
+
+		(vlax-invoke spc 'addcircle ptr rad)
+	)
+)

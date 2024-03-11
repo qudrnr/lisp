@@ -58,4 +58,8 @@ qr:draw-liner
 qr:draw-lines
     - draw Continuous line
     - 연속된 라인 그리기
+
+qr:draw-Circle
+    - draw circle
+    - 원 그리기
 ```
