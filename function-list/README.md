@@ -62,4 +62,8 @@ qr:draw-lines
 qr:draw-Circle
     - draw circle
     - 원 그리기
+
+qr:draw-Dimension
+    - dimension circle
+    - 치수선 그리기
 ```

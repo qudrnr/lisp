@@ -57,7 +57,6 @@
 	)
 )
 
-
 ; ---------------------------------------------------------
 ; draw circle
 ; - 원 그리기
@@ -82,5 +81,35 @@
 	(if (and (= 'LIST (type ptr)) (< 0 rad))
 
 		(vlax-invoke spc 'addcircle ptr rad)
+	)
+)
+
+; ---------------------------------------------------------
+; dimension circle
+; - 치수선 그리기
+; ---------------------------------------------------------
+; argument
+; > p1 : [LIST]
+; > p2 : [LIST]
+; > p3 : [LIST]
+; > ang : [INT],[FLOAT]
+; ---------------------------------------------------------
+; return
+; > [VLA-OBJECT] : #<VLA-OBJECT IAcadDimRotated 00000196b8d07598>
+; ---------------------------------------------------------
+; (qr:draw-Dimension '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 10.0 0.0) pi)
+; (qr:draw-Dimension '(0.0 0.0 0.0) '(45.0 45.0 0.0) '(7.0 15.0 0.0) nil)
+; ---------------------------------------------------------
+(defun qr:draw-Dimension (p1 p2 p3 ang / doc spc)
+
+	(setq doc (vla-get-activedocument (vlax-get-acad-object))
+		  spc (vlax-get-property doc 'modelspace)
+	)
+
+	(if (= nil ang) (setq ang (angle p1 p2)))
+
+	(if (and p1 p2 p3 (listp p1) (listp p2) (listp p3))
+
+		(vlax-invoke spc 'AddDimRotated p1 p2 p3 ang)
 	)
 )
