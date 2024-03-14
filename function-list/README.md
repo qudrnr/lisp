@@ -18,7 +18,7 @@ qr:string-removeNumber
 
 ```
 
-# Registry.lsp
+## Registry.lsp
 ```
 qr:reg-startup
     - Import the list in [appload]-[startup] from the registry.
@@ -26,7 +26,7 @@ qr:reg-startup
 
 ```
 
-# List.lsp
+## List.lsp
 ```
 qr:list-removeIndex
     - Delete the nth value from the list.
@@ -38,7 +38,7 @@ qr:list-insertIndex
 
 ```
 
-# Style.lsp
+## Style.lsp
 ```
 qr:style-text
     - make text style
@@ -53,7 +53,7 @@ qr:style-delTrustLocation
     - 'Trusted Location'에서 Path를 삭제.
 ```
 
-# draw.lsp
+## draw.lsp
 ```
 qr:draw-liner
     - draw line
