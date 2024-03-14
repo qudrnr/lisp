@@ -26,3 +26,37 @@
 		"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; Add the nth value of the list.
+; n 번째 값을 추가한다.
+; ---------------------------------------------------------
+; (qr:list-insertIndex "qr" 1 '("A" "B" "C" "D" "E"))
+; > ("A" "qr" "B" "C" "D" "E")
+; ---------------------------------------------------------
+(defun qr:list-insertIndex ( value index lst / iv )
+
+	(if (and (= 'int (type index)) (= 'LIST (type lst)))
+
+		(progn
+
+			(setq iv -1)
+
+			(apply 'append
+				(mapcar
+					'(lambda ( var )
+
+						(setq iv (1+ iv))
+
+						(if (= iv index)
+							(list value var)
+							(list var)
+						)
+
+					) lst
+				)
+			)
+		)
+		"failed:bad argument type"
+	)
+)

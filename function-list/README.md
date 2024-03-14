@@ -32,6 +32,10 @@ qr:list-removeIndex
     - Delete the nth value from the list.
     - 리스트에서 n 번째 값을 삭제한다.
 
+qr:list-insertIndex
+    - Add the nth value of the list.
+    - n 번째 값을 추가한다.
+
 ```
 
 # Style.lsp
