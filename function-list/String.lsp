@@ -6,10 +6,10 @@
 ; Divide sentences using reference characters.
 ; 참조 문자를 사용해서 문장을 나눕니다.
 ; ---------------------------------------------------------
-; (qr:string-divide "a,b,c" ",")
+; (qr:stringDivide "a,b,c" ",")
 ; > ("a" "b" "c")
 ; ---------------------------------------------------------
-(defun qr:string-divide ( sentence div / pos new )
+(defun qr:stringDivide ( sentence div / pos new )
 
 	(if (= 'str (type sentence) (type div))
 
@@ -20,7 +20,7 @@
 				(setq new
 					(cons
 						(substr sentence 1 pos)
-						(qr:string-divide
+						(qr:stringDivide
 							(substr sentence (+ pos 1 (strlen div)))
 							div
 						)
@@ -39,10 +39,10 @@
 ; Converts all strings to lowercase letters.
 ; 문자열을 모두 소문자로 변환합니다.
 ; ---------------------------------------------------------
-; (qr:string-lowerCase "ABCDE")
+; (qr:stringLowerCase "ABCDE")
 ; > "abcde"
 ; ---------------------------------------------------------
-(defun qr:string-lowerCase ( args )
+(defun qr:stringLowerCase ( args )
 
 	(if (= 'str (type args))
 
@@ -68,9 +68,9 @@
 ; Combine all the texts in the list and put characters in between.
 ; 리스트안에 있는 모든 텍스트를 합치고 그 사이에 문자를 넣어준다.
 ; ---------------------------------------------------------
-; (qr:string-insert '("A" "B" "C") "/")  -> "A/B/C"
+; (qr:stringInsert '("A" "B" "C") "/")  -> "A/B/C"
 ; ---------------------------------------------------------
-(defun qr:string-insert ( args add / string-list qty iv )
+(defun qr:stringInsert ( args add / string-list qty iv )
 
 	(setq string-list
 		(vl-remove-if-not
@@ -122,13 +122,13 @@
 ; Remove the numbers in the string.
 ; 문자열에 있는 숫자를 제거한다.
 ; ---------------------------------------------------------
-; (qr:string-removeNumber "123 Hello, World!! 456")
+; (qr:stringRemoveNumber "123 Hello, World!! 456")
 ; > " Hello, World!! "
 ; ---------------------------------------------------------
-; (qr:string-removeNumber "123456")
+; (qr:stringRemoveNumber "123456")
 ; > ""
 ; ---------------------------------------------------------
-(defun qr:string-removeNumber ( args / lst result )
+(defun qr:stringRemoveNumber ( args / lst result )
 
 	(if (= 'str (type args))
 

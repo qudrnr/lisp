@@ -2,10 +2,10 @@
 ; Delete the nth value from the list.
 ; 리스트에서 n 번째 값을 삭제한다.
 ; ---------------------------------------------------------
-; (qr:list-removeIndex 1 '("A" "B" "C" "D"))
+; (qr:removeIndex 1 '("A" "B" "C" "D"))
 ; > '("A" "C" "D")
 ; ---------------------------------------------------------
-(defun qr:list-removeIndex ( index lst / iv )
+(defun qr:removeIndex ( index lst / iv )
 
 	(if (and (= 'int (type index)) (= 'LIST (type lst)))
 
@@ -31,10 +31,10 @@
 ; Add the nth value of the list.
 ; n 번째 값을 추가한다.
 ; ---------------------------------------------------------
-; (qr:list-insertIndex "qr" 1 '("A" "B" "C" "D" "E"))
+; (qr:insertIndex "qr" 1 '("A" "B" "C" "D" "E"))
 ; > ("A" "qr" "B" "C" "D" "E")
 ; ---------------------------------------------------------
-(defun qr:list-insertIndex ( value index lst / iv )
+(defun qr:insertIndex ( value index lst / iv )
 
 	(if (and (= 'int (type index)) (= 'LIST (type lst)))
 

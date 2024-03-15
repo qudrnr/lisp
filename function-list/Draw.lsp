@@ -10,9 +10,9 @@
 ; return
 ; > [VLA-OBJECT] : #<VLA-OBJECT IAcadLine 000001af8550ba88>
 ; ---------------------------------------------------------
-; (qr:draw-liner '(0.0 0.0 0.0) '(100.0 100.0 0.0))
+; (qr:liner '(0.0 0.0 0.0) '(100.0 100.0 0.0))
 ; ---------------------------------------------------------
-(defun qr:draw-liner ( p1 p2 / doc spc )
+(defun qr:liner ( p1 p2 / doc spc )
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object))
 		  spc (vlax-get-property doc 'modelspace)
@@ -44,14 +44,14 @@
 ; return
 ; > [LIST] : (#<VLA-OBJECT IAcadLine 000001af8503c8e8> #<VLA-OBJECT IAcadLine 000001af8503d128>)
 ; ---------------------------------------------------------
-; (qr:draw-lines (list '(0.0 0.0 0.0) '(0.0 100.0 0.0) '(100.0 100.0 0.0)))
+; (qr:lines (list '(0.0 0.0 0.0) '(0.0 100.0 0.0) '(100.0 100.0 0.0)))
 ; ---------------------------------------------------------
-(defun qr:draw-lines ( plst )
+(defun qr:lines ( plst )
 
 	(mapcar
 		'(lambda ( r1 r2 )
 
-			(qr:draw-liner r1 r2)
+			(qr:liner r1 r2)
 
 		 ) plst (cdr plst)
 	)
@@ -68,9 +68,9 @@
 ; return
 ; > [VLA-OBJECT] : #<VLA-OBJECT IAcadCircle 00000196b4118628>
 ; ---------------------------------------------------------
-; (qr:draw-Circle '(0.0 0.0 0.0) 100)
+; (qr:circle '(0.0 0.0 0.0) 100)
 ; ---------------------------------------------------------
-(defun qr:draw-Circle ( ptr rad / doc spc )
+(defun qr:circle ( ptr rad / doc spc )
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object))
 		  spc (vlax-get-property doc 'modelspace)
@@ -97,10 +97,10 @@
 ; return
 ; > [VLA-OBJECT] : #<VLA-OBJECT IAcadDimRotated 00000196b8d07598>
 ; ---------------------------------------------------------
-; (qr:draw-Dimension '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 10.0 0.0) pi)
-; (qr:draw-Dimension '(0.0 0.0 0.0) '(45.0 45.0 0.0) '(7.0 15.0 0.0) nil)
+; (qr:dimension '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 10.0 0.0) pi)
+; (qr:dimension '(0.0 0.0 0.0) '(45.0 45.0 0.0) '(7.0 15.0 0.0) nil)
 ; ---------------------------------------------------------
-(defun qr:draw-Dimension (p1 p2 p3 ang / doc spc)
+(defun qr:dimension (p1 p2 p3 ang / doc spc)
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object))
 		  spc (vlax-get-property doc 'modelspace)
