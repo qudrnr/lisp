@@ -1,4 +1,4 @@
-# String.lsp
+## String.lsp
 ```
 qr:string-divide
     - Divide sentences using reference characters.
@@ -18,7 +18,7 @@ qr:string-removeNumber
 
 ```
 
-# Registry.lsp
+## Registry.lsp
 ```
 qr:reg-startup
     - Import the list in [appload]-[startup] from the registry.
@@ -26,6 +26,7 @@ qr:reg-startup
 
 ```
 
+<<<<<<< HEAD
 # number.lsp
 ```
 qr:Random
@@ -34,6 +35,9 @@ qr:Random
 ```
 
 # List.lsp
+=======
+## List.lsp
+>>>>>>> 2303ce018305fb51b5bc0bfad9b594f6fe70f650
 ```
 qr:list-removeIndex
     - Delete the nth value from the list.
@@ -45,6 +49,7 @@ qr:list-insertIndex
 
 ```
 
+<<<<<<< HEAD
 # draw.lsp
 ```
 qr:draw-liner
@@ -66,6 +71,9 @@ qr:draw-Dimension
 
 
 # Style.lsp
+=======
+## Style.lsp
+>>>>>>> 2303ce018305fb51b5bc0bfad9b594f6fe70f650
 ```
 qr:style-text
     - make text style
@@ -80,7 +88,7 @@ qr:style-delTrustLocation
     - 'Trusted Location'에서 Path를 삭제.
 ```
 
-# draw.lsp
+## draw.lsp
 ```
 qr:draw-liner
     - draw line
