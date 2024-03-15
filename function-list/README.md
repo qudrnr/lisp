@@ -26,6 +26,13 @@ qr:reg-startup
 
 ```
 
+# number.lsp
+```
+qr:Random
+    - Create a random number.
+    - 임의의 숫자를 만든다.
+```
+
 # List.lsp
 ```
 qr:list-removeIndex
@@ -37,6 +44,26 @@ qr:list-insertIndex
     - n 번째 값을 추가한다.
 
 ```
+
+# draw.lsp
+```
+qr:draw-liner
+    - draw line
+    - 라인 그리기
+
+qr:draw-lines
+    - draw Continuous line
+    - 연속된 라인 그리기
+
+qr:draw-Circle
+    - draw circle
+    - 원 그리기
+
+qr:draw-Dimension
+    - dimension circle
+    - 치수선 그리기
+```
+
 
 # Style.lsp
 ```
