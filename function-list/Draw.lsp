@@ -85,8 +85,8 @@
 )
 
 ; ---------------------------------------------------------
-; dimension circle
-; - 치수선 그리기
+; linear dimension
+; - 직선 치수선 그리기
 ; ---------------------------------------------------------
 ; argument
 ; > p1 : [LIST]
@@ -111,5 +111,32 @@
 	(if (and p1 p2 p3 (listp p1) (listp p2) (listp p3))
 
 		(vlax-invoke spc 'AddDimRotated p1 p2 p3 ang)
+	)
+)
+
+; ---------------------------------------------------------
+; angle dimension
+; - 각도 치수선 그리기
+; ---------------------------------------------------------
+; argument
+; > p0 : [LIST] : Center point
+; > p1 : [LIST] : start
+; > p2 : [LIST] : end
+; > p3 : [LIST] : text position
+; ---------------------------------------------------------
+; return
+; > [VLA-OBJECT] : #<VLA-OBJECT IAcadDimAngular 0000028c85b8baf8>
+; ---------------------------------------------------------
+; (qr:angleDimension (getpoint) (getpoint) (getpoint) (getpoint))
+; ---------------------------------------------------------
+(defun qr:angleDimension ( p0 p1 p2 p3 / doc spc )
+
+	(setq doc (vla-get-activedocument (vlax-get-acad-object))
+		  spc (vlax-get-property doc 'modelspace)
+	)
+
+	(if (and p0 p1 p2 p3 (listp p0) (listp p1) (listp p2) (listp p3))
+
+		(vlax-invoke spc 'AddDimAngular p0 p1 p2 p3)
 	)
 )

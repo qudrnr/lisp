@@ -13,8 +13,12 @@ qr:circle
     - 원 그리기
 
 qr:dimension
-    - dimension circle
-    - 치수선 그리기
+    - Rotated dimension
+    - 직선 치수선 그리기
+
+qr:angleDimension
+    - Angular dimension
+    - 각도 치수선 그리기
 ```
 
 ## List.lsp
