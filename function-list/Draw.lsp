@@ -140,3 +140,63 @@
 		(vlax-invoke spc 'AddDimAngular p0 p1 p2 p3)
 	)
 )
+
+; ---------------------------------------------------------
+; Clear all VLA objects in the list from the drawing
+; - 리스트에 있는 VLA객체를 도면에서 모두 지운다
+; ---------------------------------------------------------
+; argument
+; > [LIST]
+; ---------------------------------------------------------
+; return
+; ---------------------------------------------------------
+; (qr:DeleteObject (list ...))
+; ---------------------------------------------------------
+(defun qr:DeleteObject ( lst )
+
+	(if (listp lst)
+
+		(mapcar 'qr:DeleteObject lst)
+
+		(if (and
+				(= 'VLA-OBJECT (type lst))
+
+				(vlax-read-enabled-p lst)
+
+				(vlax-method-applicable-p lst 'delete)
+			)
+
+			(vl-catch-all-apply 'vla-delete (list lst))
+		)
+	)
+)
+
+; ---------------------------------------------------------
+; Clears all objects in modelspace
+; - modelspace에 있는 모든 객체를 지운다
+; ---------------------------------------------------------
+; (qr:deleteModelspaceObject)
+; ---------------------------------------------------------
+(defun qr:deleteModelspaceObject (/ doc )
+
+	(setq doc (vla-get-activedocument (vlax-get-acad-object)))
+
+	(vlax-for obj (vla-get-modelspace doc) (qr:DeleteObject obj))
+
+	(princ)
+)
+
+; ---------------------------------------------------------
+; Clears all objects in paperspace
+; - paperspace 있는 모든 객체를 지운다
+; ---------------------------------------------------------
+; (qr:deleteModelspaceObject)
+; ---------------------------------------------------------
+(defun qr:deletePaperspaceObject (/ doc )
+
+	(setq doc (vla-get-activedocument (vlax-get-acad-object)))
+
+	(vlax-for obj (vla-get-paperspace doc) (qr:DeleteObject obj))
+
+	(princ)
+)

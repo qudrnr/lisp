@@ -16,9 +16,17 @@ qr:dimension
     - Rotated dimension
     - 직선 치수선 그리기
 
-qr:angleDimension
-    - Angular dimension
-    - 각도 치수선 그리기
+qr:DeleteObject
+    - Clear all VLA objects in the list from the drawing
+    - 리스트에 있는 VLA객체를 도면에서 모두 지운다
+
+qr:deleteModelspaceObject
+    - Clears all objects in modelspace
+    - modelspace에 있는 모든 객체를 지운다
+
+qr:deletePaperspaceObject
+    - Clears all objects in paperspace
+    - paperspace 있는 모든 객체를 지운다
 ```
 
 ## List.lsp
