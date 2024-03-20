@@ -20,11 +20,11 @@ qr:DeleteObject
     - Clear all VLA objects in the list from the drawing
     - 리스트에 있는 VLA객체를 도면에서 모두 지운다
 
-qr:deleteModelspaceObject
+qr:DeleteObjectOnModelspace
     - Clears all objects in modelspace
     - modelspace에 있는 모든 객체를 지운다
 
-qr:deletePaperspaceObject
+qr:DeleteObjectonPaperspace
     - Clears all objects in paperspace
     - paperspace 있는 모든 객체를 지운다
 ```
