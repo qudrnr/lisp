@@ -24,7 +24,7 @@ qr:DeleteObjectOnModelspace
     - Clears all objects in modelspace
     - modelspace에 있는 모든 객체를 지운다
 
-qr:DeleteObjectonPaperspace
+qr:DeleteObjectOnPaperspace
     - Clears all objects in paperspace
     - paperspace 있는 모든 객체를 지운다
 ```
