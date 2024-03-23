@@ -200,3 +200,16 @@
 
 	(princ)
 )
+
+(defun qr:Group ( lst / doc )
+
+	(setq doc (vla-get-activedocument (vlax-get-acad-object)))
+
+	(if (vl-remove nil lst)
+		(vlax-invoke
+			(vla-add (vla-get-groups doc) "*")
+			'appenditems
+			lst
+		)
+	)
+)
