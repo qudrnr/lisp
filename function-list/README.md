@@ -27,6 +27,10 @@ qr:DeleteObjectOnModelspace
 qr:DeleteObjectOnPaperspace
     - Clears all objects in paperspace
     - paperspace 있는 모든 객체를 지운다
+
+qr:Group
+    - Group the objects in the list.
+    - 리스트안에 있는 객체를 그룹으로 묶어준다.
 ```
 
 ## List.lsp
@@ -38,6 +42,10 @@ qr:removeIndex
 qr:insertIndex
     - Add the nth value of the list.
     - n 번째 값을 추가한다.
+
+qr:flatten
+    - Flatten the overlapping list.
+    - 중첩되어 있는 리스트를 평탄화 한다.
 
 ```
 
