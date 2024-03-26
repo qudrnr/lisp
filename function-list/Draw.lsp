@@ -201,15 +201,43 @@
 	(princ)
 )
 
-(defun qr:Group ( lst / doc )
+; ---------------------------------------------------------
+; Group the objects in the list.
+; - 리스트안에 있는 객체를 그룹으로 묶어준다.
+; ---------------------------------------------------------
+; argument
+; > [LIST] (VLA-OBJECT)
+; ---------------------------------------------------------
+; requirement
+; > qr:flatten
+; ---------------------------------------------------------
+; (qr:Group (list #<VLA-OBJECT IAc ....))
+; ---------------------------------------------------------
+(defun qr:Group ( lst / doc flatten-list vlaObject )
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object)))
 
-	(if (vl-remove nil lst)
-		(vlax-invoke
-			(vla-add (vla-get-groups doc) "*")
-			'appenditems
-			lst
+	(if (= 'LIST (type lst))
+
+		(if (and (setq flatten-list (qr:flatten lst))
+
+				(setq vlaObject
+					(vl-remove-if-not
+						'(lambda (obj)
+
+							(= 'VLA-OBJECT (type obj))
+
+						) flatten-list
+					)
+				)
+			)
+			(vlax-invoke
+				(vla-add (vla-get-groups doc) "*")
+				'appenditems
+				vlaObject
+			)
+			"failed:not found object"
 		)
+		"failed:bad argument type"
 	)
 )
