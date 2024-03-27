@@ -78,9 +78,14 @@
 
 	(if (= 'str (type rad))		(setq rad (atof rad)))
 
-	(if (and (= 'LIST (type ptr)) (< 0 rad))
+	(if (= 'LIST (type ptr))
 
-		(vlax-invoke spc 'addcircle ptr rad)
+		(if (< 0 rad)
+
+			(vlax-invoke spc 'addcircle ptr rad)
+			"failed:The radius value must be greater than zero >> (0)"
+		)
+		"failed:bad argument type >> (Center Point)"
 	)
 )
 
