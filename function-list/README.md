@@ -97,4 +97,8 @@ qr:TrustLocationAdd
 qr:TrustLocationDel
     - Delete Path from 'Trusted Location'.
     - 'Trusted Location'에서 Path를 삭제.
+
+qr:OpenFolder
+    - open folder
+    - 윈도우에서 폴더를 열어서 보여준다.
 ```
