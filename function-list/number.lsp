@@ -14,14 +14,25 @@
 
 	(setq len (1+ (length (vl-string->list var))))
 
-	(if (and count var len (= 'INT (type count)) (< 0 count len))
+	(if (= 'int (type count))
 
-		(if (and (setq res (atoi (substr var (- len count))))
+		(if (< 0 count 10)
 
-				(/= (length (vl-string->list (itoa res))) count)
+			(if (< count len)
+
+				(if (and (setq res (atoi (substr var (- len count))))
+
+						(/= (length (vl-string->list (itoa res))) count)
+					)
+
+					(qr:Random count)
+
+					res
+				)
+				(qr:Random count)
 			)
-
-			(qr:Num-Random count) res
+			"failed:out of range"
 		)
+		"failed:bad argument type"
 	)
 )
