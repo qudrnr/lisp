@@ -90,3 +90,38 @@
 		)
 	)
 )
+
+; ---------------------------------------------------------
+; Show all nth of the values in the list.
+; 리스트에서 값의 nth를 모두 보여준다.
+; ---------------------------------------------------------
+; argument
+; > [INT], [STRING], '[LIST] ...
+; > [LIST]
+; ---------------------------------------------------------
+; return
+; > [LIST]
+; ---------------------------------------------------------
+; (qr:position "A" '("A" "B" "C" "A" "D"))
+; > (0 3)
+; ---------------------------------------------------------
+(defun qr:position ( value lst / index )
+
+	(setq index -1)
+
+	(if (and value (listp lst))
+
+		(vl-remove nil
+			(mapcar
+				'(lambda ( item )
+
+					(setq index (1+ index))
+
+					(if (equal value item)	index)
+
+				) lst
+			)
+		)
+		"failed:bad argument type"
+	)
+)

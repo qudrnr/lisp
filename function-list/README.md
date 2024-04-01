@@ -47,6 +47,10 @@ qr:flatten
     - Flatten the overlapping list.
     - 중첩되어 있는 리스트를 평탄화 한다.
 
+qr:position
+    - Show all nth of the values in the list.
+    - 리스트에서 값의 nth를 모두 보여준다.
+
 ```
 
 ## number.lsp
