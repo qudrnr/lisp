@@ -1,7 +1,3 @@
-
-
-
-
 ; ---------------------------------------------------------
 ; Set the print range of sheet.
 ; 시트의 인쇄범위를 설정한다.
@@ -14,11 +10,8 @@
 ; - PageSetup.PrintArea property (Excel)
 ; - https://learn.microsoft.com/en-us/office/vba/api/excel.pagesetup.printarea
 ; ---------------------------------------------------------
-; (qr:ExcelPrintArea
-
-	; (vlax-get-or-create-object "Excel.Application")
-	; "A1:C3"
-; )
+; (setq xlApp (vlax-get-or-create-object "Excel.Application"))
+; (qr:ExcelPrintArea xlApp "A1:C3")
 ; ---------------------------------------------------------
 (defun qr:ExcelPrintArea ( app range / oActivate oPagesetup )
 
