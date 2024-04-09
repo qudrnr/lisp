@@ -32,62 +32,48 @@
 				(set (read str) (cadr var))
 			)
 
-			(if (= nil var)
-
-				(if	(setq default
-						(cond
-							(	(= "name" str)		"temp")
-							(	(= "height" str) 	2.5)
-							(	(= "width" str)		0.9)
-							(	(= "font" str)		"Arial")
-							(	(= "bigfont" str)	"")
-						)
-					)
-
-					(set (read str) default)
-				)
-			)
-
 		) '("name" "height" "width" "font" "bigfont")
 	)
 
-	(if (= 'str (type name) (type font))
+	(if (= 'str (type name))		(setq name "temp-name"))
+	(if (= 'real (type height))		(setq height 2.5))
+	(if (= 'real (type width))		(setq width 0.9))
+	(if (= 'str (type font))		(setq font "Arial"))
+	(if (= 'str (type bigfont))		(setq bigfont ""))
 
-		(if (not (tblsearch "style" name))
+	(if (not (tblsearch "style" name))
 
-			(progn
+		(progn
 
-				(if (= 'str (type height))
+			(if (= 'str (type height))
 
-					(setq height (atof height))
-				)
+				(setq height (atof height))
+			)
 
-				(entmake
-					(list
-						(cons 0 "STYLE")
-						(cons 100 "AcDbSymbolTableRecord")
-						(cons 100 "AcDbTextStyleTableRecord")
-						(cons 2 name)
-						(cons 70 0)
-						(cons 40 height)
-						(cons 41 width)			; Width Factor
-						(cons 50 0.0)			; Oblique angle
-						(cons 71 0)
-						(cons 42 height)		; Last height used
-						(cons 3 font)			; Primary font name
-						(cons 4 bigfont)		; Big font name
-					)
-				)
-
-				(if (tblsearch "style" name)
-
-					t
-					"failed:an unknown reason"
+			(entmake
+				(list
+					(cons 0 "STYLE")
+					(cons 100 "AcDbSymbolTableRecord")
+					(cons 100 "AcDbTextStyleTableRecord")
+					(cons 2 name)
+					(cons 70 0)
+					(cons 40 height)
+					(cons 41 width)			; Width Factor
+					(cons 50 0.0)			; Oblique angle
+					(cons 71 0)
+					(cons 42 height)		; Last height used
+					(cons 3 font)			; Primary font name
+					(cons 4 bigfont)		; Big font name
 				)
 			)
-			"failed:the same name exists"
+
+			(if (= nil (tblsearch "style" name))
+
+				"failed:an unknown reason"
+				t
+			)
 		)
-		"failed:bad argument type"
+		"failed:the same name exists"
 	)
 )
 
@@ -99,9 +85,9 @@
 ; make layer
 ; 레이어를 만든다.
 ; ---------------------------------------------------------
-(qr:CreateLayer '(("name""new2")("line" "CONTINUOUS")("color" 2)))
+; (qr:CreateLayer '(("name""new2")("line" "continuous")("color" 2)))
 ; ---------------------------------------------------------
-(defun qr:CreateLayer ( args / name height width font bigfont )
+(defun qr:CreateLayer ( args / name line color )
 
 	(mapcar
 		'(lambda ( str / var )
@@ -111,50 +97,36 @@
 				(set (read str) (cadr var))
 			)
 
-			(if (= nil var)
-
-				(if	(setq default
-						(cond
-							(	(= "name"  str)		"temp-name")
-							(	(= "line"  str)		"CONTINUOUS")
-							(	(= "color" str)		7)
-						)
-					)
-
-					(set (read str) default)
-				)
-			)
-
 		) '("name" "line" "color")
 	)
 
-	(if (= 'str (type name))
+	(if (= 'str (type name))	(setq name "temp-name"))
+	(if (= 'str (type line))	(setq line "continuous"))
+	(if (= 'int (type color))	(setq color 7))
 
-		(if (not (tblsearch "layer" name))
+	(if (not (tblsearch "layer" name))
 
-			(progn
+		(progn
 
-				(entmakex
-					(list
-						(cons   0 "LAYER")
-						(cons 100 "AcDbSymbolTableRecord")
-						(cons 100 "AcDbLayerTableRecord")
-						(cons   2 name)
-						(cons   6 line)
-						(cons  62 color)
-						(cons  70 0)
-					)
-				)
-
-				(if (tblsearch "layer" name)
-
-					t
-					"failed:an unknown reason"
+			(entmakex
+				(list
+					(cons   0 "LAYER")
+					(cons 100 "AcDbSymbolTableRecord")
+					(cons 100 "AcDbLayerTableRecord")
+					(cons   2 name)
+					(cons   6 line)
+					(cons  62 color)
+					(cons  70 0)
 				)
 			)
-			"failed:the same name exists"
+
+			(if (= nil (tblsearch "layer" name))
+
+				"failed:an unknown reason"
+				t
+			)
 		)
-		"failed:bad argument type"
+		"failed:the same name exists"
 	)
 )
 
