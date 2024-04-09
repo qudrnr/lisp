@@ -91,6 +91,73 @@
 	)
 )
 
+
+; https://github.com/qudrnr/lisp
+; Autolisp and Visual Lisp in Autocad
+
+; ---------------------------------------------------------
+; make layer
+; 레이어를 만든다.
+; ---------------------------------------------------------
+(qr:CreateLayer '(("name""new2")("line" "CONTINUOUS")("color" 2)))
+; ---------------------------------------------------------
+(defun qr:CreateLayer ( args / name height width font bigfont )
+
+	(mapcar
+		'(lambda ( str / var )
+
+			(if (setq var (assoc str args))
+
+				(set (read str) (cadr var))
+			)
+
+			(if (= nil var)
+
+				(if	(setq default
+						(cond
+							(	(= "name"  str)		"temp-name")
+							(	(= "line"  str)		"CONTINUOUS")
+							(	(= "color" str)		7)
+						)
+					)
+
+					(set (read str) default)
+				)
+			)
+
+		) '("name" "line" "color")
+	)
+
+	(if (= 'str (type name))
+
+		(if (not (tblsearch "layer" name))
+
+			(progn
+
+				(entmakex
+					(list
+						(cons   0 "LAYER")
+						(cons 100 "AcDbSymbolTableRecord")
+						(cons 100 "AcDbLayerTableRecord")
+						(cons   2 name)
+						(cons   6 line)
+						(cons  62 color)
+						(cons  70 0)
+					)
+				)
+
+				(if (tblsearch "layer" name)
+
+					t
+					"failed:an unknown reason"
+				)
+			)
+			"failed:the same name exists"
+		)
+		"failed:bad argument type"
+	)
+)
+
 ; ---------------------------------------------------------
 ; 'Trusted Location' adds Path.
 ; 'Trusted Location'에서 Path를 추가.
