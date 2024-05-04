@@ -51,6 +51,10 @@ qr:position
     - Show all nth of the values in the list.
     - 리스트에서 값의 nth를 모두 보여준다.
 
+qr:add
+    - Appends a value to the end of the list.
+    - 값을 리스트 뒤에 추가해준다
+
 ```
 
 ## number.lsp
