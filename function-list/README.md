@@ -55,6 +55,10 @@ qr:add
     - Appends a value to the end of the list.
     - 값을 리스트 뒤에 추가해준다
 
+qr:removeLast
+    - Remove one last value from the list
+    - 리스트에서 맨 뒤에 있는 값 한개를 제거
+
 ```
 
 ## number.lsp
