@@ -31,33 +31,48 @@
 ; Add the nth value of the list.
 ; n 번째 값을 추가한다.
 ; ---------------------------------------------------------
-; (qr:insertIndex "qr" 1 '("A" "B" "C" "D" "E"))
-; > ("A" "qr" "B" "C" "D" "E")
+; (qr:insertIndex "100" 1 '("A" "B" "C" "D" "E"))
+; > ("A" "100" "B" "C" "D" "E")
+
+; (qr:insertIndex "100" nil '("A" "B" "C" "D" "E"))
+; > ("A" "B" "C" "D" "E" "100")
+
+; (qr:insertIndex "100" nil nil)
+; > ("100")
 ; ---------------------------------------------------------
 (defun qr:insertIndex ( value index lst / iv )
 
-	(if (and (= 'int (type index)) (= 'LIST (type lst)))
+	(if (listp lst)
 
 		(progn
 
 			(setq iv -1)
 
-			(apply 'append
-				(mapcar
-					'(lambda ( var )
+			(if (/= 'int (type index))
 
-						(setq iv (1+ iv))
+				(setq index (length lst))
+			)
 
-						(if (= iv index)
-							(list value var)
-							(list var)
-						)
+			(if (<= 0 index (1- (length lst)))
 
-					) lst
+				(apply 'append
+					(mapcar
+						'(lambda ( item )
+
+							(setq iv (1+ iv))
+
+							(if (= iv index)
+								(list value item)
+								(list item)
+							)
+
+						) lst
+					)
 				)
+				(apply 'append (list lst (list value)))
 			)
 		)
-		"failed:bad argument type"
+		(list value)
 	)
 )
 
