@@ -7,7 +7,7 @@
 ; ---------------------------------------------------------
 (defun qr:removeIndex ( index lst / iv )
 
-	(if (and (= 'int (type index)) (= 'LIST (type lst)))
+	(if (and (= 'int (type index)) (listp lst))
 
 		(progn
 
@@ -188,4 +188,27 @@
 (defun qr:removeLast ( lst )
 
 	(reverse (cdr (reverse lst)))
+)
+
+; ---------------------------------------------------------
+; Attach the index number to the list.
+; 리스트에 인덱스 번호를 부착한다.
+; ---------------------------------------------------------
+; (qr:indexed '("a" "b" "c" "d"))
+;   =>((0 "a") (1 "b") (2 "c") (3 "d"))
+; ---------------------------------------------------------
+(defun qr:indexed (lst / index)
+
+	(setq index -1)
+	(if (listp lst)
+		(mapcar
+			'(lambda (element)
+
+				(setq index (1+ index))
+				(list index element)
+
+			) lst
+		)
+		"failed:bad argument type"
+	)
 )

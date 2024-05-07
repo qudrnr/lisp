@@ -180,9 +180,9 @@
 ; Clears all objects in modelspace
 ; - modelspace에 있는 모든 객체를 지운다
 ; ---------------------------------------------------------
-; (qr:DeleteObjectOnModelspace)
+; (qr:DeleteObjOnModelspace)
 ; ---------------------------------------------------------
-(defun qr:DeleteObjectOnModelspace (/ doc )
+(defun qr:DeleteObjOnModelspace (/ doc )
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object)))
 
@@ -195,9 +195,9 @@
 ; Clears all objects in paperspace
 ; - paperspace 있는 모든 객체를 지운다
 ; ---------------------------------------------------------
-; (qr:DeleteObjectOnPaperspace)
+; (qr:DeleteObjOnPaperspace)
 ; ---------------------------------------------------------
-(defun qr:DeleteObjectOnPaperspace (/ doc )
+(defun qr:DeleteObjOnPaperspace (/ doc )
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object)))
 
