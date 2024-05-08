@@ -59,6 +59,10 @@ qr:removeLast
     - Remove one last value from the list
     - 리스트에서 맨 뒤에 있는 값 한개를 제거
 
+qr:removeRange
+    - Removes a range of elements from the list.
+    - 리스트에서 인덱스 범위 안에 있는 값 제거
+
 qr:indexed
     - Attach the index number to the list.
     - 리스트에 인덱스 번호를 부착한다.
