@@ -31,6 +31,11 @@ qr:DeleteObjectOnPaperspace
 qr:Group
     - Group the objects in the list.
     - 리스트안에 있는 객체를 그룹으로 묶어준다.
+
+qr:Polyline
+    - draw polyline
+    - 폴리라인을 그린다.
+
 ```
 
 ## List.lsp

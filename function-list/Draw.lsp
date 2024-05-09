@@ -246,3 +246,48 @@
 		"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; draw polyline
+; 폴리라인을 그린다.
+; ---------------------------------------------------------
+; argument
+; > [LIST] (point)
+; ---------------------------------------------------------
+; (qr:Polyline (list '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 100.0 0.0) '(0.0 0.0 0.0)))
+; ---------------------------------------------------------
+(defun qr:Polyline ( lst / _flatten doc spc ptr)
+
+	(defun _flatten ( value )
+
+		(apply 'append
+			(mapcar
+				'(lambda (element)
+
+					(if (listp element)
+
+						(_flatten element)
+						(list element)
+					)
+
+				) value
+			)
+		)
+	)
+
+	(setq doc (vla-get-activedocument (vlax-get-acad-object))
+		  spc (vlax-get-property doc 'modelspace)
+	)
+
+	(if (setq ptr
+			(_flatten
+				(mapcar 'list
+					(mapcar 'car lst)
+					(mapcar 'cadr lst)
+				)
+			)
+		)
+
+		(vlax-invoke spc 'addlightweightpolyline ptr)
+	)
+)
