@@ -10,9 +10,10 @@
 ; return
 ; > [VLA-OBJECT] : #<VLA-OBJECT IAcadLine 000001af8550ba88>
 ; ---------------------------------------------------------
-; (qr:liner '(0.0 0.0 0.0) '(100.0 100.0 0.0))
+; (qr:lineDraw '(0.0 0.0 0.0) '(100.0 100.0 0.0))
+; (qr:lineDraw (vlax-3d-point '(0.0 0.0 0.0)) (vlax-3d-point '(100.0 200.0 0.0)))
 ; ---------------------------------------------------------
-(defun qr:liner ( p1 p2 / doc spc )
+(defun qr:lineDraw ( p1 p2 / doc spc )
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object))
 		  spc (vlax-get-property doc 'modelspace)
@@ -21,11 +22,11 @@
 	(cond
 		(	(= 'LIST (type p1) (type p2))
 
-			(vlax-invoke spc 'addLine p1 p2)
+			(vl-catch-all-apply 'vlax-invoke (list spc 'addLine p1 p2))
 		)
-		(	(= 'variant (type p1) (type p2))
+		(	(= 'VARIANT (type p1) (type p2))
 
-			(vla-addline spc p1 p2)
+			(vl-catch-all-apply 'vla-addline (list spc p1 p2))
 		)
 		(	t
 
@@ -44,16 +45,17 @@
 ; return
 ; > [LIST] : (#<VLA-OBJECT IAcadLine 000001af8503c8e8> #<VLA-OBJECT IAcadLine 000001af8503d128>)
 ; ---------------------------------------------------------
-; (qr:lines (list '(0.0 0.0 0.0) '(0.0 100.0 0.0) '(100.0 100.0 0.0)))
+; (qr:lineContinueDraw (list '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 100.0 0.0)))
+; (qr:lineContinueDraw (list (vlax-3d-point '(0.0 0.0 0.0)) (vlax-3d-point '(90.0 2.0 0.0)) (vlax-3d-point '(80.0 150.0 0.0))))
 ; ---------------------------------------------------------
-(defun qr:lines ( plst )
+(defun qr:lineContinueDraw ( lst )
 
 	(mapcar
 		'(lambda ( r1 r2 )
 
-			(qr:liner r1 r2)
+			(qr:lineDraw r1 r2)
 
-		 ) plst (cdr plst)
+		 ) lst (cdr lst)
 	)
 )
 
@@ -69,6 +71,7 @@
 ; > [VLA-OBJECT] : #<VLA-OBJECT IAcadCircle 00000196b4118628>
 ; ---------------------------------------------------------
 ; (qr:circle '(0.0 0.0 0.0) 100)
+; (qr:circle (vlax-3d-point '(55.0 23.0 0.0)) 70)
 ; ---------------------------------------------------------
 (defun qr:circle ( ptr rad / doc spc )
 
@@ -78,14 +81,19 @@
 
 	(if (= 'str (type rad))		(setq rad (atof rad)))
 
-	(if (= 'LIST (type ptr))
+	(if (< 0 rad)
 
-		(if (< 0 rad)
+		(cond
+			(	(= 'LIST (type ptr))
 
-			(vlax-invoke spc 'addcircle ptr rad)
-			"failed:The radius value must be greater than zero >> (0)"
+				(vl-catch-all-apply 'vlax-invoke (list spc 'addcircle ptr rad))
+			)
+			(	(= 'VARIANT (type ptr))
+
+				(vl-catch-all-apply 'vla-addCircle (list spc ptr rad))
+			)
 		)
-		"failed:bad argument type >> (Center Point)"
+		"failed:The radius value must be greater than zero >> (0)"
 	)
 )
 
@@ -103,7 +111,8 @@
 ; > [VLA-OBJECT] : #<VLA-OBJECT IAcadDimRotated 00000196b8d07598>
 ; ---------------------------------------------------------
 ; (qr:dimension '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 10.0 0.0) pi)
-; (qr:dimension '(0.0 0.0 0.0) '(45.0 45.0 0.0) '(7.0 15.0 0.0) nil)
+; (qr:dimension '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 10.0 0.0) nil)
+; (qr:dimension (vlax-3d-point '(0.0 0.0 0.0)) (vlax-3d-point '(45.0 45.0 0.0)) (vlax-3d-point '(7.0 15.0 0.0)) nil)
 ; ---------------------------------------------------------
 (defun qr:dimension (p1 p2 p3 ang / doc spc)
 
@@ -111,11 +120,31 @@
 		  spc (vlax-get-property doc 'modelspace)
 	)
 
-	(if (= nil ang) (setq ang (angle p1 p2)))
+	(cond
+		(	(= 'LIST (type p1))
 
-	(if (and p1 p2 p3 (listp p1) (listp p2) (listp p3))
+			(if (= nil ang)
 
-		(vlax-invoke spc 'AddDimRotated p1 p2 p3 ang)
+				(setq ang (vl-catch-all-apply 'angle (list p1 p2)))
+			)
+
+			(vl-catch-all-apply 'vlax-invoke
+				(list spc 'AddDimRotated p1 p2 p3 ang)
+			)
+		)
+		(	(= 'VARIANT (type p1)(type p2)(type p3))
+
+			(if (= nil ang)
+				(setq ang
+					(angle
+						(vlax-safearray->list (vlax-variant-value p1))
+						(vlax-safearray->list (vlax-variant-value p2))
+					)
+				)
+			)
+
+			(vl-catch-all-apply 'vla-AddDimRotated (list spc p1 p2 p3 ang))
+		)
 	)
 )
 
@@ -140,9 +169,8 @@
 		  spc (vlax-get-property doc 'modelspace)
 	)
 
-	(if (and p0 p1 p2 p3 (listp p0) (listp p1) (listp p2) (listp p3))
-
-		(vlax-invoke spc 'AddDimAngular p0 p1 p2 p3)
+	(vl-catch-all-apply 'vlax-invoke
+		(list spc 'AddDimAngular p0 p1 p2 p3)
 	)
 )
 
@@ -213,18 +241,35 @@
 ; argument
 ; > [LIST] (VLA-OBJECT)
 ; ---------------------------------------------------------
-; requirement
-; > qr:flatten
-; ---------------------------------------------------------
 ; (qr:Group (list #<VLA-OBJECT IAc ....))
 ; ---------------------------------------------------------
-(defun qr:Group ( lst / doc flatten-list vlaObject )
+(defun qr:Group ( lst / _flatten
+
+		doc flatten-list vlaObject
+	)
+
+	(defun _flatten (lst)
+
+		(apply 'append
+			(mapcar
+				'(lambda (ov)
+
+					(if (listp ov)
+
+						(_flatten ov)
+						(list ov)
+					)
+
+				) lst
+			)
+		)
+	)
 
 	(setq doc (vla-get-activedocument (vlax-get-acad-object)))
 
 	(if (= 'LIST (type lst))
 
-		(if (and (setq flatten-list (qr:flatten lst))
+		(if (and (setq flatten-list (_flatten lst))
 
 				(setq vlaObject
 					(vl-remove-if-not
