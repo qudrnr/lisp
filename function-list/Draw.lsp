@@ -121,12 +121,9 @@
 	)
 
 	(cond
-		(	(= 'LIST (type p1))
+		(	(= 'LIST (type p1)(type p2)(type p3))
 
-			(if (= nil ang)
-
-				(setq ang (vl-catch-all-apply 'angle (list p1 p2)))
-			)
+			(if (= nil ang)		(setq ang (angle p1 p2)))
 
 			(vl-catch-all-apply 'vlax-invoke
 				(list spc 'AddDimRotated p1 p2 p3 ang)
