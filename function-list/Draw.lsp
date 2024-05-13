@@ -166,8 +166,19 @@
 		  spc (vlax-get-property doc 'modelspace)
 	)
 
-	(vl-catch-all-apply 'vlax-invoke
-		(list spc 'AddDimAngular p0 p1 p2 p3)
+	(cond
+		(	(= 'LIST (type p0)(type p1)(type p2)(type p3))
+
+			(vl-catch-all-apply 'vlax-invoke
+				(list spc 'AddDimAngular p0 p1 p2 p3)
+			)
+		)
+		(	(= 'VARIANT (type p0)(type p1)(type p2)(type p3))
+
+			(vl-catch-all-apply 'vla-AddDimRotated
+				(list spc p0 p1 p2 p3)
+			)
+		)
 	)
 )
 
