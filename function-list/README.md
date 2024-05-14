@@ -79,6 +79,9 @@ qr:indexed
 qr:Random
     - Create a random number.
     - 임의의 숫자를 만든다.
+qr:Dtr
+    - degree to Radius
+    - 각도를 바꾼다.
 ```
 
 ## Registry.lsp
