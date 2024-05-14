@@ -82,6 +82,9 @@ qr:Random
 qr:Dtr
     - degree to Radius
     - 각도를 바꾼다.
+qr:Rtd
+    - Radius to degree
+    - 각도를 바꾼다.
 ```
 
 ## Registry.lsp
