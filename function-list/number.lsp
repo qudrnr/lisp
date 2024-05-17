@@ -64,3 +64,39 @@
 		"failed:bad argument type"
 	)
 )
+
+; -----------------------------------------------------
+; Rounding (Same as Excel function)
+; 반올림
+; -----------------------------------------------------
+; argument
+; > number : [int], [real]
+; > digits : [int]
+; -----------------------------------------------------
+; return
+; > real
+; -----------------------------------------------------
+; (qr:Round 126.7825 -2) => 100
+; (qr:Round 126.7825 -1) => 130
+; (qr:Round 126.7825 0)  => 127
+; (qr:Round 126.7825 1)  => 126.8
+; (qr:Round 126.7825 2)  => 126.78
+; (qr:Round 126.7825 3)  => 126.783
+; -----------------------------------------------------
+(defun qr:Round ( number digits / mul )
+
+	(if (vl-position (type number) '(INT REAL))
+
+		(if (= 'INT (type digits))
+
+			(progn
+
+				(setq mul (expt 10.0 digits))
+
+				(/ (fix (+ (* number mul) 0.5)) mul)
+			)
+			"failed:bad argument type"
+		)
+		"failed:bad argument type"
+	)
+)

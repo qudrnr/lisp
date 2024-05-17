@@ -85,6 +85,10 @@ qr:Dtr
 qr:Rtd
     - Radius to degree
     - 각도를 바꾼다.
+qr:Round
+    - Rounding (Same as Excel function)
+    - 반올림
+
 ```
 
 ## Registry.lsp
