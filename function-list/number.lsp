@@ -85,17 +85,15 @@
 ; -----------------------------------------------------
 (defun qr:Round ( number digits / mul )
 
-	(if (vl-position (type number) '(INT REAL))
+	(if (vl-position (type number) '(int real))
 
-		(if (= 'INT (type digits))
+		(progn
 
-			(progn
+			(if (/= 'int (type digits)) (setq digits 0))
 
-				(setq mul (expt 10.0 digits))
+			(setq mul (expt 10.0 digits))
 
-				(/ (fix (+ (* number mul) 0.5)) mul)
-			)
-			"failed:bad argument type"
+			(/ (fix (+ (* number mul) 0.5)) mul)
 		)
 		"failed:bad argument type"
 	)
