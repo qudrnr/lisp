@@ -88,7 +88,9 @@ qr:Rtd
 qr:Round
     - Rounding (Same as Excel function)
     - 반올림
-
+qr:RoundUp
+    - Rounding Up (Same as Excel function)
+    - 올림
 ```
 
 ## Registry.lsp

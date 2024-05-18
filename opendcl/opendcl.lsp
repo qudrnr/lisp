@@ -13,19 +13,27 @@
 		bp bs wid1 wid2 hei1 hei2 new-position
 	)
 
-	(mapcar 'set '(wid1 hei1) (dcl-Form-GetControlArea baseform))
-	(mapcar 'set '(wid2 hei2) (dcl-Form-GetControlArea newform))
+	(if (= 'ENAME (type baseform) (type newform))
 
-	(setq bp (dcl-Control-GetPos baseform)
-		  bs (list (* 0.5 (- wid1 wid2)) (* 0.5 (- hei1 hei2)))
-	)
+		(progn
 
-	(if (setq new-position
-			(list
-				(fix (+ (car bs)  (car bp)))
-				(fix (+ (cadr bs) (cadr bp)))
+			(mapcar 'set '(wid1 hei1) (dcl-Form-GetControlArea baseform))
+			(mapcar 'set '(wid2 hei2) (dcl-Form-GetControlArea newform))
+
+			(setq bp (dcl-Control-GetPos baseform)
+				  bs (list (* 0.5 (- wid1 wid2)) (* 0.5 (- hei1 hei2)))
+			)
+
+			(setq new-position
+				(list
+					(fix (+ (car bs)  (car bp)))
+					(fix (+ (cadr bs) (cadr bp)))
+				)
 			)
 		)
+	)
+
+	(if (= 'LIST (type new-position))
 
 		(dcl-Form-Show newform (car new-position) (cadr new-position))
 		(dcl-Form-Show newform)
