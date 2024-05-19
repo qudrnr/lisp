@@ -148,3 +148,53 @@
 		"failed:bad argument type"
 	)
 )
+
+; -----------------------------------------------------
+; Rounding down (Same as Excel function)
+; 내림 (엑셀함수와 동일)
+; 소수점 이하의 자릿수를 고려하여 값을 내림
+; -----------------------------------------------------
+; argument
+; > number : [int], [real]  : 내림할 숫자
+; > digits : [int]			: 소수점 이하로 내림할 자리 수
+; 	- 0 	 : 정수 부분만 남기고 소수 부분 제거
+; 	- 양수 : 소수점 이하의 특정 자리만 남기고 이후는 버림
+; 	- 음수 : 소수점 왼쪽의 특정 자리를 0으로
+; -----------------------------------------------------
+; return
+; > real
+; -----------------------------------------------------
+; (qr:RoundDown 126.7825 -2) => 100.0000
+; (qr:RoundDown 126.7825 -1) => 120.0000
+; (qr:RoundDown 126.7825 0)  => 126.0000
+; (qr:RoundDown 126.7825 1)  => 126.7000
+; (qr:RoundDown 126.7825 2)  => 126.7800
+; (qr:RoundDown 126.7825 3)  => 126.7820
+; -----------------------------------------------------
+(defun qr:RoundDown ( number digits / factor )
+
+	(if (vl-position (type number) '(int real))
+
+		(progn
+
+			(if (/= 'int (type digits)) (setq digits 0))
+
+			(if (<= 0 digits)
+
+				(progn
+
+					(setq factor (expt 10.0 digits))
+
+					(/ (fix (* number factor)) factor)
+				)
+				(progn
+
+					(setq factor (expt 10.0 (- digits)))
+
+					(* (fix (/ number factor)) factor)
+				)
+			)
+		)
+		"failed:bad argument type"
+	)
+)
