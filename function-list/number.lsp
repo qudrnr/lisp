@@ -198,3 +198,50 @@
 		"failed:bad argument type"
 	)
 )
+
+; -----------------------------------------------------
+; m Rounding (Same as Excel function)
+; 원하는 배수로 반올림된 숫자를 반환
+; -----------------------------------------------------
+; argument
+; > value : [int], [real]  		: 반올림할 숫자
+; > multiple : [int], [real]	: 반올림할 배수
+; 	- 0  	: 원래의 값을 반환합니다.
+; 	- 음수	: 원래의 값을 반환합니다.
+; > 두 인수의 부호가 같아야한다.
+; -----------------------------------------------------
+; return
+; > [int]
+; -----------------------------------------------------
+; (qr:mRound 10 3) 		=> 9
+; (qr:mRound -10 -3) 	=> -9
+; (qr:mRound -10 3) 	=> "failed:bad argument type"
+; (qr:mRound 1.3 0.2)  	=> 1.4
+; -----------------------------------------------------
+(defun qr:mRound ( value multiple / quotient result )
+
+	(if (and (vl-position (type value) '(int real))
+			 (vl-position (type multiple) '(int real))
+		)
+
+		(if (/= 0 multiple)
+
+			(if (or (and (< 0 value)(< 0 multiple))
+					(and (< value 0)(< multiple 0))
+				)
+
+				(progn
+
+					(setq quotient (/ value multiple))
+
+					(setq result (fix (+ quotient 0.5)))
+
+					(* result multiple)
+				)
+				"failed:bad argument type"
+			)
+			value
+		)
+		"failed:bad argument type"
+	)
+)

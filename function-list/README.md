@@ -94,6 +94,9 @@ qr:RoundUp
 qr:RoundDown
     - Rounding Down (Same as Excel function)
     - 내림
+qr:mRound
+    - mRound (Same as Excel function)
+    - 배수로 반올림
 ```
 
 ## Registry.lsp
