@@ -38,16 +38,19 @@
 )
 
 ; ---------------------------------------------------------
-; degree to Radius
-; 디그리 -> 라디안
+; Converts degrees to radians.
+; 도 단위를 라디안으로 변환합니다.
 ; ---------------------------------------------------------
-; (qr:Dtr 90.0) => 1.5708
+; argument
+; > ang : Required. An angle in degrees that you want to convert.
 ; ---------------------------------------------------------
-(defun qr:Dtr ( deg )
+; (qr:Radians 90.0) => 1.5708
+; ---------------------------------------------------------
+(defun qr:Radians ( ang )
 
-	(if (vl-position (type deg) '(REAL INT))
+	(if (vl-position (type ang) '(REAL INT))
 
-		(* pi (/ deg 180.0))
+		(* pi (/ ang 180.0))
 		"failed:bad argument type"
 	)
 )
