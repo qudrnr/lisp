@@ -248,3 +248,33 @@
 		"failed:bad argument type"
 	)
 )
+
+; -----------------------------------------------------
+; Returns the arcsine, or inverse sine, of a number.
+; The arcsine is the angle whose sine is number.
+; The returned angle is given in radians in the range -pi/2 to pi/2.
+; 아크사인, 즉 역 사인 값을 반환합니다.
+; 아크사인 값은 사인 값이 number인 각도입니다.
+; 반환되는 각도는 -pi/2에서 pi/2 사이의 라디안으로 표시됩니다.
+; -----------------------------------------------------
+; argument
+; > number => Required.
+; 	The sine of the angle you want and must be from -1 to 1.
+; -----------------------------------------------------
+; (qr:Asin -0.5)	=> -0.523599
+; (qr:Asin 0.0)		=> 0.0
+; (qr:Asin 0.5)		=> 0.523599
+; (qr:Asin 1.5)		=> "failed:out of range -1 to 1"
+; -----------------------------------------------------
+(defun qr:Asin ( number)
+
+	(if (vl-position (type number) '(int real))
+
+		(if (<= -1.0 number 1.0)
+
+			(atan number (sqrt (- 1.0 (* number number))))
+			"failed:out of range -1 to 1"
+		)
+		"failed:bad argument type"
+	)
+)

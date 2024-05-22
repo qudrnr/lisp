@@ -97,6 +97,9 @@ qr:RoundDown
 qr:mRound
     - mRound (Same as Excel function)
     - 배수로 반올림
+qr:Asin
+    - arcsine, or inverse sine, of a number.
+    - 아크사인, 역 사인 값
 ```
 
 ## Registry.lsp
