@@ -278,3 +278,33 @@
 		"failed:bad argument type"
 	)
 )
+
+; -----------------------------------------------------
+; Returns the arccosine, or inverse cosine, of a number.
+; The arccosine is the angle whose cosine is number.
+; The returned angle is given in radians in the range 0 (zero) to pi.
+; 아크코사인, 즉 역 코사인 값을 반환합니다.
+; 아크코사인 값은 코사인 값이 number인 각도입니다.
+; 반환되는 각도는 0에서 pi 사이의 라디안으로 표시됩니다.
+; -----------------------------------------------------
+; argument
+; > number => Required.
+; 	The sine of the angle you want and must be from -1 to 1.
+; -----------------------------------------------------
+; (qr:Acos -0.5)	=> 2.0944
+; (qr:Acos 0.0)		=> 1.5708
+; (qr:Acos 0.5)		=> 1.0472
+; (qr:Acos 1.5)		=> "failed:out of range -1 to 1"
+; -----------------------------------------------------
+(defun qr:Acos ( number)
+
+	(if (vl-position (type number) '(int real))
+
+		(if (<= -1.0 number 1.0)
+
+			(atan (sqrt (- 1.0 (* number number))) number)
+			"failed:out of range -1 to 1"
+		)
+		"failed:bad argument type"
+	)
+)

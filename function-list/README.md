@@ -100,6 +100,9 @@ qr:mRound
 qr:Asin
     - arcsine, or inverse sine, of a number.
     - 아크사인, 역 사인 값
+qr:Acos
+    - arccosine, or inverse cosine, of a number.
+    - 아크코사인, 역 코사인 값
 ```
 
 ## Registry.lsp
