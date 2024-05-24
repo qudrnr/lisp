@@ -266,7 +266,7 @@
 ; (qr:Asin 0.5)		=> 0.523599
 ; (qr:Asin 1.5)		=> "failed:out of range -1 to 1"
 ; -----------------------------------------------------
-(defun qr:Asin ( number)
+(defun qr:aSin ( number )
 
 	(if (vl-position (type number) '(int real))
 
@@ -296,7 +296,7 @@
 ; (qr:Acos 0.5)		=> 1.0472
 ; (qr:Acos 1.5)		=> "failed:out of range -1 to 1"
 ; -----------------------------------------------------
-(defun qr:Acos ( number)
+(defun qr:aCos ( number )
 
 	(if (vl-position (type number) '(int real))
 
@@ -305,6 +305,32 @@
 			(atan (sqrt (- 1.0 (* number number))) number)
 			"failed:out of range -1 to 1"
 		)
+		"failed:bad argument type"
+	)
+)
+
+; -----------------------------------------------------
+; Returns the inverse hyperbolic sine of a number.
+; The inverse hyperbolic sine is the value whose
+; hyperbolic sine is number, so ASINH(SINH(number)) equals number.
+; 역 하이퍼볼릭 사인 값을 반환합니다.
+; 역 하이퍼볼릭 사인 값은 하이퍼볼릭 사인 값이 number인 값이므로
+; ASINH(SINH(number))는 number와 같습니다.
+; -----------------------------------------------------
+; argument
+; > number => Required. Any real number.
+; -----------------------------------------------------
+; (qr:aSinH 0)		=> 0.0000
+; (qr:aSinH 0.5)	=> 0.481212
+; (qr:aSinH 1)		=> 0.881374
+; (qr:aSinH -0.5)	=> -0.481212
+; (qr:aSinH -1.0)	=> -0.881374
+; -----------------------------------------------------
+(defun qr:aSinH ( number )
+
+	(if (vl-position (type number) '(int real))
+
+		(log (+ number (sqrt (1+ (* number number)))))
 		"failed:bad argument type"
 	)
 )

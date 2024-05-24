@@ -97,12 +97,15 @@ qr:RoundDown
 qr:mRound
     - mRound (Same as Excel function)
     - 배수로 반올림
-qr:Asin
+qr:aSin
     - arcsine, or inverse sine, of a number.
     - 아크사인, 역 사인 값
-qr:Acos
+qr:aCos
     - arccosine, or inverse cosine, of a number.
     - 아크코사인, 역 코사인 값
+qr:aSinh
+    - inverse hyperbolic sine of a number.
+    - 역 하이퍼볼릭 사인 값
 ```
 
 ## Registry.lsp
