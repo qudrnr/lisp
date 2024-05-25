@@ -334,3 +334,33 @@
 		"failed:bad argument type"
 	)
 )
+
+; -----------------------------------------------------
+; Returns the inverse hyperbolic cosine of a number.
+; The number must be greater than or equal to 1.
+; The inverse hyperbolic cosine is the value whose
+; hyperbolic cosine is number, so ACOSH(COSH(number)) equals number.
+; 역 하이퍼볼릭 코사인 값을 반환합니다.
+; number는 1보다 크거나 같아야 합니다.
+; 역 하이퍼볼릭 코사인 값은 하이퍼볼릭 코사인 값이 number인
+; 값이므로 ACOSH(COSH(number))는 number와 같습니다.
+; -----------------------------------------------------
+; argument
+; > number => Required. Any real number equal to or greater than 1.
+; -----------------------------------------------------
+; (qr:aCosH 0)		=> "failed:out of range, equal to or greater than 1."
+; (qr:aCosH 1)		=> 0.0
+; (qr:aCosH 10)		=> 2.99322
+; -----------------------------------------------------
+(defun qr:aCosH ( number )
+
+	(if (vl-position (type number) '(int real))
+
+		(if (<= 1.0 number)
+
+			(log (+ number (sqrt (1- (* number number)))))
+			"failed:out of range, equal to or greater than 1."
+		)
+		"failed:bad argument type"
+	)
+)

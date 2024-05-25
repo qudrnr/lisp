@@ -106,6 +106,9 @@ qr:aCos
 qr:aSinh
     - inverse hyperbolic sine of a number.
     - 역 하이퍼볼릭 사인 값
+qr:aCosH
+    - inverse hyperbolic cosine of a number.
+    - 역 하이퍼볼릭 코사인 값
 ```
 
 ## Registry.lsp
