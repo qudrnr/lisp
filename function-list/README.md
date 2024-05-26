@@ -109,6 +109,9 @@ qr:aSinh
 qr:aCosH
     - inverse hyperbolic cosine of a number.
     - 역 하이퍼볼릭 코사인 값
+qr:aTanH
+    - inverse hyperbolic tangent of a number.
+    - 역 하이퍼볼릭 탄젠트 값
 ```
 
 ## Registry.lsp

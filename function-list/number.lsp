@@ -330,7 +330,7 @@
 
 	(if (vl-position (type number) '(int real))
 
-		(log (+ number (sqrt (1+ (* number number)))))
+		(log (+ number (sqrt (+ 1 (* number number)))))
 		"failed:bad argument type"
 	)
 )
@@ -358,8 +358,40 @@
 
 		(if (<= 1.0 number)
 
-			(log (+ number (sqrt (1- (* number number)))))
+			(log (+ number (sqrt (- 1 (* number number)))))
 			"failed:out of range, equal to or greater than 1."
+		)
+		"failed:bad argument type"
+	)
+)
+
+; -----------------------------------------------------
+; Returns the inverse hyperbolic tangent of a number.
+; Number must be between -1 and 1 (excluding -1 and 1).
+; The inverse hyperbolic tangent is the value whose
+; hyperbolic tangent is number, so ATANH(TANH(number)) equals number.
+; 역 하이퍼볼릭 탄젠트 값을 반환합니다.
+; number는 -1과 1 사이의 값이어야 합니다(-1과 1은 제외).
+; 역 하이퍼볼릭 탄젠트 값은 하이퍼볼릭 탄젠트 값이 number인 값이므로
+; ATANH(TANH(number))는 number와 같습니다.
+; -----------------------------------------------------
+; argument
+; > number => Required. Any real number between 1 and -1.
+; -----------------------------------------------------
+; (qr:aTanH -1.5)		=> "failed:out of range -1 to 1"
+; (qr:aTanH -0.5)		=> -0.549306
+; (qr:aTanH 0)			=> 0.0
+; (qr:aTanH 0.5)		=> 0.549306
+; (qr:aTanH 1.5)		=> "failed:out of range -1 to 1"
+; -----------------------------------------------------
+(defun qr:aTanH ( number )
+
+	(if (vl-position (type number) '(int real))
+
+		(if (< -1.0 number 1.0)
+
+			(* 0.5 (log (/ (+ 1 number) (- 1 number))))
+			"failed:out of range -1 to 1"
 		)
 		"failed:bad argument type"
 	)
