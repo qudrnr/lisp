@@ -72,6 +72,10 @@ qr:indexed
     - Attach the index number to the list.
     - 리스트에 인덱스 번호를 부착한다.
 
+qr:midPoint
+    - Calculate the midpoint of the two points.
+    - 두 점의 중간점을 계산한다.
+
 ```
 
 ## number.lsp
