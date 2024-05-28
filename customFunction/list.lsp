@@ -246,21 +246,56 @@
 ; ---------------------------------------------------------
 (defun qr:midPoint ( p1 p2 )
 
-	(cond
+	(if (and (= 'LIST (type p1) (type p2)))
 
-		(	(and (= 'LIST (type p1) (type p2)))
+		(mapcar
+			'(lambda ( r1 r2 )
 
+				(/ (+ r1 r2) 2.0)
+
+			) p1 p2
+		)
+		"failed:bad argument type"
+	)
+)
+
+; ---------------------------------------------------------
+; Ensure that three or more points are in a straight line
+; 세 점 또는 그 이상의 점들이 일직선 상에 존재하는지 확인
+; 각 점 쌍의 기울기를 비교하여 모든 점이 동일한 기울기를 가지는지 확인
+; 부동 소수점 연산의 정밀도 문제로 오차가 있을 수 있음.
+; ---------------------------------------------------------
+; argument
+; > [LIST] (point)
+; ---------------------------------------------------------
+; return
+; > T or nil
+; ---------------------------------------------------------
+; (qr:Collinear-p (list (getpoint)(getpoint)(getpoint)(getpoint)(getpoint)))
+; ---------------------------------------------------------
+(defun qr:Collinear-p ( points / type-list )
+
+	(setq type-list (mapcar 'type points))
+
+	(if (and (apply '= type-list) (= 'LIST (car type-list)))
+
+		(apply 'and
 			(mapcar
-				'(lambda ( r1 r2 )
+				'(lambda ( p1 p2 p3 / x1 x2 x3 y1 y2 y3 )
 
-					(/ (+ r1 r2) 2.0)
+					(mapcar 'set '(x1 y1) p1)
+					(mapcar 'set '(x2 y2) p2)
+					(mapcar 'set '(x3 y3) p3)
 
-				) p1 p2
+					(equal
+						(*	(- x2 x1) (- y3 y2))
+						(*	(- y2 y1) (- x3 x2))
+						1e-10
+					)
+
+				) points (cdr points) (cdr (cdr points))
 			)
 		)
-		(	t
-
-			"failed:bad argument type"
-		)
+		"failed:bad argument type"
 	)
 )

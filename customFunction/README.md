@@ -76,6 +76,10 @@ qr:midPoint
     - Calculate the midpoint of the two points.
     - 두 점의 중간점을 계산한다.
 
+qr:Collinear-p
+    - Ensure that three or more points are in a straight line
+    - 세 점 또는 그 이상의 점들이 일직선 상에 존재하는지 확인
+
 ```
 
 ## number.lsp
