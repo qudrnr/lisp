@@ -80,6 +80,10 @@ qr:Collinear-p
     - Ensure that three or more points are in a straight line
     - 세 점 또는 그 이상의 점들이 일직선 상에 존재하는지 확인
 
+qr:boundingbox
+    - Find four square points as the boundary of the object.
+    - 객체의 경계로 사각형 포인트 4개를 구한다.
+
 ```
 
 ## number.lsp

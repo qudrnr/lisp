@@ -299,3 +299,43 @@
 		"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; Find four square points as the boundary of the object.
+; 객체의 경계로 사각형 포인트 4개를 구한다.
+; ---------------------------------------------------------
+; argument
+; > [VLA-OBJECT]
+; ---------------------------------------------------------
+; return
+; > point list
+; ---------------------------------------------------------
+; (qr:boundingbox (vlax-ename->vla-object (car (entsel))))
+; ---------------------------------------------------------
+(defun qr:boundingbox ( obj / minExt maxExt x1 y1 x2 y2)
+
+	(if (not
+			(vl-catch-all-error-p
+				(vl-catch-all-apply 'vlax-method-applicable-p
+					(list obj 'getboundingbox)
+				)
+			)
+		)
+		(progn
+
+			(vla-GetBoundingBox obj 'minExt 'maxExt)
+
+			(mapcar 'set '(x1 y1) (vlax-safearray->list minExt))
+			(mapcar 'set '(x2 y2) (vlax-safearray->list maxExt))
+
+			(list
+				(list x1 y1 0.0)
+				(list x2 y1 0.0)
+				(list x2 y2 0.0)
+				(list x1 y2 0.0)
+			)
+		)
+
+		"failed:bad argument type"
+	)
+)
