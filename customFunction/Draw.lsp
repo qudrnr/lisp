@@ -307,7 +307,7 @@
 ; argument
 ; > [LIST] (point)
 ; ---------------------------------------------------------
-; (qr:Polyline (list '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 100.0 0.0) '(0.0 0.0 0.0)))
+; (qr:Polyline (list '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 100.0 0.0)))
 ; ---------------------------------------------------------
 (defun qr:Polyline ( lst / _flatten doc spc ptr)
 
@@ -332,7 +332,7 @@
 		  spc (vlax-get-property doc 'modelspace)
 	)
 
-	(if (setq ptr
+	(if	(setq ptr
 			(_flatten
 				(mapcar 'list
 					(mapcar 'car lst)
@@ -340,7 +340,11 @@
 				)
 			)
 		)
+		(if (<= 4 (length ptr))
 
-		(vlax-invoke spc 'addlightweightpolyline ptr)
+			(vlax-invoke spc 'addlightweightpolyline ptr)
+		 	"failed:Not enough points"
+		)
+	 	"failed:bad argument type"
 	)
 )
