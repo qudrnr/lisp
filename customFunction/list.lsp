@@ -124,7 +124,7 @@
 
 	(setq index -1)
 
-	(if (and value (listp lst))
+	(if value
 
 		(vl-remove nil
 			(mapcar
