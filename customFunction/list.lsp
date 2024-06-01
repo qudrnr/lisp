@@ -199,14 +199,17 @@
 (defun qr:removeRange ( start end lst / index )
 
 	(setq index -1)
-	(vl-remove-if
-		'(lambda ( element )
+	(if (= 'int (type start) (type end))
 
-			(setq index (1+ index))
+		(vl-remove-if
+			'(lambda ( element )
 
-			(<= start index end)
+				(setq index (1+ index))
 
-		) lst
+				(<= start index end)
+
+			) lst
+		)
 	)
 )
 
