@@ -210,6 +210,7 @@
 
 			) lst
 		)
+		"failed:bad argument type"
 	)
 )
 
