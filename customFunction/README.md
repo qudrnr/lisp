@@ -84,6 +84,9 @@ qr:boundingbox
     - Find four square points as the boundary of the object.
     - 객체의 경계로 사각형 포인트 4개를 구한다.
 
+qr:qty
+    - Calculate the number of elements in the list.
+    - 리스트 안에 있는 원소의 개수를 계산한다.
 ```
 
 ## number.lsp

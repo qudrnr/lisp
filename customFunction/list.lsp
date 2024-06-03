@@ -343,3 +343,33 @@
 		"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; Calculate the number of elements in the list.
+; 리스트 안에 있는 원소의 개수를 계산한다.
+; ---------------------------------------------------------
+; argument
+; > [LIST]
+; > value
+; ---------------------------------------------------------
+; return
+; > [INT]
+; ---------------------------------------------------------
+; (qr:qty '("A" "B" "C" "A" "A" "B" ) "A")
+;  => 3
+; ---------------------------------------------------------
+(defun qr:Qty ( Lst item )
+
+	(if (= 'LIST (type lst))
+		(length
+			(vl-remove-if-not
+				'(lambda ( element )
+
+					(equal element item)
+
+				) Lst
+			)
+		)
+		"failed:bad argument type"
+	)
+)
