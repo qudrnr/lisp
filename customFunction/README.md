@@ -87,6 +87,10 @@ qr:boundingbox
 qr:qty
     - Calculate the number of elements in the list.
     - 리스트 안에 있는 원소의 개수를 계산한다.
+
+qr:3pCenter
+    - Calculates the center point of three 3D coordinates, assuming the z-coordinate is always 0.
+    - 3차원 좌표 3개를 입력받아 중심점을 계산.
 ```
 
 ## number.lsp

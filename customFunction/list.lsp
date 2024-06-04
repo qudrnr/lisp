@@ -373,3 +373,31 @@
 		"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; Calculates the center point of three 3D coordinates, assuming the z-coordinate is always 0.
+; 3차원 좌표 3개를 입력받아 중심점을 계산.
+; z축 값은 항상 0.0으로 고정.
+; ---------------------------------------------------------
+; argument
+; > [LIST] point
+; > [LIST] point
+; > [LIST] point
+; ---------------------------------------------------------
+; return
+; > [LIST] point
+; ---------------------------------------------------------
+(defun qr:3pCenter ( p1 p2 p3 / x y )
+
+	(if (and (= 'LIST (type p1) (type p2) (type p3)))
+
+		(progn
+
+			(setq x (/ (+ (car  p1)(car  p2)(car  p3)) 3.0)
+			  	  y (/ (+ (cadr p1)(cadr p2)(cadr p3)) 3.0)
+			)
+			(list x y 0.0)
+		)
+		"failed:bad argument type"
+	)
+)
