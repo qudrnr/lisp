@@ -348,3 +348,67 @@
 	 	"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; draw polyline
+; 폴리라인을 그린다.
+; ---------------------------------------------------------
+; argument
+; > [LIST] (point)
+; > [INT] : 1 or T or "true" (닫힌폴리라인을 그린다)
+; ---------------------------------------------------------
+; (qr:LWPolyline (list '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 100.0 0.0)) 1)
+; (qr:LWPolyline (list '(0.0 0.0 0.0) '(100.0 0.0 0.0) '(100.0 100.0 0.0)) 0)
+; ---------------------------------------------------------
+(defun qr:LWPolyline ( points closer / lst ist closed )
+
+	(if (= 'LIST (type points))
+
+		(if (setq lst
+				(vl-remove-if-not
+					'(lambda ( element )
+
+						(and
+							(= 'LIST (type element))
+							(= 3 (length element))
+						)
+
+					) points
+				)
+			)
+			(progn
+
+				(setq ist
+					(mapcar
+						'(lambda (element)
+							(cons 10 element)
+						) lst
+					)
+				)
+
+				(if (vl-position closer '(1 T "true"))
+
+					(setq closed 1)
+					(setq closed 0)
+				)
+
+				(vlax-ename->vla-object
+					(entmakex
+						(append
+							(list
+								(cons 0 "LWPOLYLINE")
+								(cons 100 "AcDbEntity")
+								(cons 100 "AcDbPolyline")
+								(cons 90 (length lst))
+								(cons 70 closed)
+							)
+							ist
+						)
+					)
+				)
+			)
+			"failed:Not enough points"
+		)
+		"failed:bad argument type"
+	)
+)

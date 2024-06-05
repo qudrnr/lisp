@@ -36,6 +36,10 @@ qr:Polyline
     - draw polyline
     - 폴리라인을 그린다.
 
+qr:LWPolyline
+    - draw polyline
+    - 폴리라인을 그린다.
+
 ```
 
 ## List.lsp
