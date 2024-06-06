@@ -187,7 +187,11 @@
 ; ---------------------------------------------------------
 (defun qr:removeLast ( lst )
 
-	(reverse (cdr (reverse lst)))
+	(if (= 'LIST (type lst))
+
+		(reverse (cdr (reverse lst)))
+		"failed:bad argument type"
+	)
 )
 
 ; ---------------------------------------------------------
