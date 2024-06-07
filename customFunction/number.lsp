@@ -396,3 +396,46 @@
 		"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; Calculate the angle formed by three points in 3D space given their coordinates.
+; 3차원 좌표 3개를 입력받아 세 점이 이루는 각도를 계산
+; ---------------------------------------------------------
+; argument
+; > [LIST] point
+; > [LIST] point
+; > [LIST] point
+; ---------------------------------------------------------
+; return
+; > [real] (radian)
+; ---------------------------------------------------------
+(defun qr:3pAngle ( p1 p2 p3 / v1 v2 mag_v1 mag_v2 value cosTheta )
+
+	(if (and (= 'LIST (type p1) (type p2) (type p3)))
+
+		(progn
+
+			; 벡터 계산
+			(setq v1 (list (- (nth 0 p1) (nth 0 p2)) (- (nth 1 p1) (nth 1 p2))))
+			(setq v2 (list (- (nth 0 p3) (nth 0 p2)) (- (nth 1 p3) (nth 1 p2))))
+
+			; 벡터의 크기 계산
+			(setq mag_v1 (sqrt (+ (expt (nth 0 v1) 2) (expt (nth 1 v1) 2))))
+			(setq mag_v2 (sqrt (+ (expt (nth 0 v2) 2) (expt (nth 1 v2) 2))))
+
+			(setq value
+				(+ 	(* (nth 0 v1) (nth 0 v2))
+					(* (nth 1 v1) (nth 1 v2))
+				)
+			)
+
+			(setq cosTheta (/ value (* mag_v1 mag_v2)))
+
+			(if (<= -1.0 cosTheta 1.0)
+
+				(atan (sqrt (- 1.0 (* cosTheta cosTheta))) cosTheta)
+			)
+		)
+		"failed:bad argument type"
+	)
+)

@@ -135,6 +135,9 @@ qr:aCosH
 qr:aTanH
     - inverse hyperbolic tangent of a number.
     - 역 하이퍼볼릭 탄젠트 값
+qr:3pAngle
+    - Calculate the angle formed by three points in 3D space given their coordinates.
+    - 3차원 좌표 3개를 입력받아 세 점이 이루는 각도를 계산
 ```
 
 ## Registry.lsp
