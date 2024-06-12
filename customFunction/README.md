@@ -153,18 +153,21 @@ qr:reg-startup
 qr:stringDivide
     - Divide sentences using reference characters.
     - 참조 문자를 사용해서 문장을 나눕니다.
-
 qr:stringLowerCase
     - Converts all strings to lowercase letters.
     - 문자열을 모두 소문자로 변환합니다.
-
 qr:stringInsert
     - Combine all the texts in the list and put characters in between.
     - 리스트안에 있는 모든 텍스트를 합치고 그 사이에 문자를 넣어준다.
-
 qr:stringRemoveNumber
     - Remove the numbers in the string.
     - 문자열에 있는 숫자를 제거한다.
+qr:setClipText
+    - Save text tot the window clipboard
+    - 윈도우 클립보드에 텍스트를 저장한다.
+qr:getClipText
+    - Read the text from the windows clipboad
+    - 윈도우 클립보드에 있는 텍스트를 읽어온다.
 
 ```
 

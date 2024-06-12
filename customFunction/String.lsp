@@ -153,3 +153,61 @@
 		"failed:bad argument type"
 	)
 )
+
+; ---------------------------------------------------------
+; Save text tot the window clipboard
+; 클립보드에 텍스트를 저장한다.
+; ---------------------------------------------------------
+; (qr:setClipText "Hello, World!!")
+; > "Hello, World!!
+; ---------------------------------------------------------
+(defun qr:setClipText ( str / html window board result)
+
+	(and (= 'STR (type str))
+
+		(setq html (vlax-create-object "htmlfile"))
+
+		(setq window (vlax-get html 'ParentWindow))
+
+		(setq board (vlax-get window 'ClipBoardData))
+
+		(setq result
+			(vl-catch-all-apply
+				'vlax-invoke (list board 'setData "Text" str)
+			)
+		)
+	)
+
+	(vlax-release-object html)
+
+	result
+)
+
+; ---------------------------------------------------------
+; Read the text from the windows clipboad
+; 윈도우 클립보드에 있는 텍스트를 읽어온다.
+; ---------------------------------------------------------
+; (qr:getClipText)
+; > "Hello, World!!
+; ---------------------------------------------------------
+(defun qr:getClipText (/ html window board result)
+
+	(and
+
+		(setq html (vlax-create-object "htmlfile"))
+
+		(setq window (vlax-get html 'ParentWindow))
+
+		(setq board (vlax-get window 'ClipBoardData))
+
+		(setq result
+			(vl-catch-all-apply
+				'vlax-invoke (list board 'getData "Text" str)
+			)
+		)
+	)
+
+	(vlax-release-object html)
+
+	result
+)
